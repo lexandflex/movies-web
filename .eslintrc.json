@@ -19,6 +19,7 @@
   },
   "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
+    "import/no-extraneous-dependencies": "off",
     "react/jsx-props-no-spreading": "off",
     "react/function-component-definition": "off",
     "import/prefer-default-export": "off",
@@ -34,6 +35,8 @@
       "error",
       "ignorePackages",
       {
+        "js": "never",
+        "jsx": "never",
         "ts": "never",
         "tsx": "never"
       }
@@ -41,7 +44,17 @@
   },
   "settings": {
     "import/resolver": {
-      "typescript": {}
+      "alias": {
+        "map": [
+          ["@components", "./src/components"],
+          ["@pages", "./src/pages"],
+          ["@assets", "./src/assets"],
+          ["@store", "./src/store"],
+          ["@services", "./src/services"],
+          ["@utils", "./src/utils"]
+        ],
+        "extensions": [".ts", ".js", ".json", ".tsx"]
+      }
     }
   }
 }

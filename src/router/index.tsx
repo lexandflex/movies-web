@@ -1,5 +1,6 @@
+import { Login } from '@pages/Login';
 import { FC, ReactElement } from 'react';
-import React, { Route, BrowserRouter as Router, Routes, Link } from 'react-router-dom';
+import React, { Route, BrowserRouter as Router, Routes, Link, Navigate } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 
 export const AppRouter: FC = (): ReactElement => {
@@ -20,13 +21,11 @@ export const AppRouter: FC = (): ReactElement => {
           path="movies/*"
           element={
             <PrivateRoute>
-              <>
-                <div>Movies route</div>
-                <Link to="/">Main</Link>
-              </>
+              <Login />
             </PrivateRoute>
           }
         />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );

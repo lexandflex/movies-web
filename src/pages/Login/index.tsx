@@ -1,7 +1,9 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
+import { Link } from 'react-router-dom';
 
-export const Login = (): ReactNode => (
+export const Login = (): ReactElement => (
   <div>
-    <p>test</p>
+    <div>Movies route</div>
+    <Link to="/">Main</Link>
   </div>
 );

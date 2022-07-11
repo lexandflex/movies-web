@@ -33,12 +33,12 @@ export const lightTheme: Theme = {
 
 export type ThemeKey = 'dark' | 'light';
 
-const themesMap = new Map<ThemeKey, Theme>();
+const themesMap = new Map<string, Theme>();
 
 themesMap.set('light', lightTheme);
 themesMap.set('dark', darkTheme);
 
-export const getTheme = (themeKey?: ThemeKey) => {
+export const getTheme = (themeKey?: string) => {
   if (themeKey && themesMap.has(themeKey)) return themesMap.get(themeKey);
   return themesMap.get('dark');
 };
