@@ -1,6 +1,7 @@
 import { Login } from '@pages/Login';
 import { FC, ReactElement } from 'react';
 import React, { Route, BrowserRouter as Router, Routes, Link, Navigate } from 'react-router-dom';
+import { Main } from '../pages/Main';
 import { PrivateRoute } from './PrivateRoute';
 
 export const AppRouter: FC = (): ReactElement => {
@@ -8,7 +9,7 @@ export const AppRouter: FC = (): ReactElement => {
   return (
     <Router>
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={
             <>
@@ -16,7 +17,8 @@ export const AppRouter: FC = (): ReactElement => {
               <Link to="/movies">Movies</Link>
             </>
           }
-        />
+        /> */}
+        <Route path="/" element={<Main />} />
         <Route
           path="movies/*"
           element={

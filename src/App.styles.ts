@@ -16,7 +16,7 @@ body {
 export const App = styled.div`
   display: flex;
   text-align: left;
-  background-color: red;
+  background-color: ${(props) => props.theme.colors.backgroundColor};
 `;
 
 // .App {
