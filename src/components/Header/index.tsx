@@ -1,18 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
-import {
-  Container,
-  Search,
-  SearchIcon,
-  Profile,
-  UserIcon,
-  SearchButton,
-  GoBackIcon,
-  MobileSearchContainer,
-  DropDown,
-  DropDownItem,
-} from './styles';
+import * as Styled from './styles';
 
 const BIG_SIZE_LOGO_URL = 'https://www.freepnglogos.com/uploads/netflix-logo-0.png';
 const SMALL_SIZE_LOGO_URL = 'https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png';
@@ -56,52 +45,52 @@ export const Header = () => {
   return (
     <>
       {showInput && (
-        <MobileSearchContainer>
-          <GoBackIcon onClick={handleOpenCloseInputTitle} />
-          <Search>
-            <SearchIcon />
+        <Styled.MobileSearchContainer>
+          <Styled.GoBackIcon onClick={handleOpenCloseInputTitle} />
+          <Styled.Search>
+            <Styled.SearchIcon />
             <input
               type="text"
               placeholder={SEARCH_PLACEHOLDER}
               value={title}
               onChange={handleChangeTitle}
             />
-          </Search>
-        </MobileSearchContainer>
+          </Styled.Search>
+        </Styled.MobileSearchContainer>
       )}
       {!showInput && (
-        <Container>
+        <Styled.Container>
           <Link to="/">{LogoImg}</Link>
 
           {width > 576 ? (
-            <Search>
-              <SearchIcon />
+            <Styled.Search>
+              <Styled.SearchIcon />
               <input
                 type="text"
                 placeholder={SEARCH_PLACEHOLDER}
                 value={title}
                 onChange={handleChangeTitle}
               />
-            </Search>
+            </Styled.Search>
           ) : (
-            <SearchButton>
-              <SearchIcon onClick={handleOpenCloseInputTitle} />
-            </SearchButton>
+            <Styled.SearchButton>
+              <Styled.SearchIcon onClick={handleOpenCloseInputTitle} />
+            </Styled.SearchButton>
           )}
 
-          <Profile>
-            <UserIcon onClick={handleOpenCloseDropdown} />
+          <Styled.Profile>
+            <Styled.UserIcon onClick={handleOpenCloseDropdown} />
             {showDropdown && (
-              <DropDown>
+              <Styled.DropDown>
                 {DROPDOWN_LINKS.map((dropdownLink) => (
-                  <DropDownItem key={dropdownLink.title} onClick={handleOpenCloseDropdown}>
+                  <Styled.DropDownItem key={dropdownLink.title} onClick={handleOpenCloseDropdown}>
                     {dropdownLink.title}
-                  </DropDownItem>
+                  </Styled.DropDownItem>
                 ))}
-              </DropDown>
+              </Styled.DropDown>
             )}
-          </Profile>
-        </Container>
+          </Styled.Profile>
+        </Styled.Container>
       )}
     </>
   );
