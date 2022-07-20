@@ -7,5 +7,6 @@ import { PrivateRouteProps } from './types';
 
 export const PrivateRoute: FC<PrivateRouteProps> = ({ children }): ReactElement => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
+  console.log('HERE EPT');
   return isAuthenticated ? children : <Navigate to="/" />;
 };

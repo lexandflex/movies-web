@@ -1,4 +1,3 @@
 import React from 'react';
-import { Header } from '../../components/Header';
 
-export const Main = () => <Header />;
+export const Main = () => <div>main route</div>;

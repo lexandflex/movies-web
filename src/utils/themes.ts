@@ -19,7 +19,7 @@ export const darkTheme: Theme = {
     textColor: '#FFFFFF',
     secondTextColor: '#d4d5d9',
     thirdTextColor: '#f2f2f2',
-    backgroundColor: '#101011',
+    backgroundColor: '#0e101c',
     secondBackgroundColor: '#030303',
   },
 };
@@ -32,7 +32,7 @@ export const lightTheme: Theme = {
     textColor: '#FFFFFF',
     secondTextColor: '#d4d5d9',
     thirdTextColor: '#f2f2f2',
-    backgroundColor: '#101011',
+    backgroundColor: '#1e2a4a',
     secondBackgroundColor: '#030303',
   },
 };

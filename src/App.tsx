@@ -1,3 +1,4 @@
+import { AppWrapper } from '@components/AppWrapper';
 import React, { FC } from 'react';
 import * as Styled from './App.styles';
 import { AppThemeProvider } from './components/AppThemeProvider';

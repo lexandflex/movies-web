@@ -1,4 +1,6 @@
+import { AppWrapper } from '@components/AppWrapper';
 import { Login } from '@pages/Login';
+import { Register } from '@pages/Register';
 import { FC, ReactElement } from 'react';
 import React, { Route, BrowserRouter as Router, Routes, Link, Navigate } from 'react-router-dom';
 import { Main } from '../pages/Main';
@@ -8,8 +10,9 @@ export const AppRouter: FC = (): ReactElement => {
   console.log('my');
   return (
     <Router>
-      <Routes>
-        {/* <Route
+      <AppWrapper>
+        <Routes>
+          {/* <Route
           path="/"
           element={
             <>
@@ -18,17 +21,20 @@ export const AppRouter: FC = (): ReactElement => {
             </>
           }
         /> */}
-        <Route path="/" element={<Main />} />
-        <Route
-          path="movies/*"
-          element={
-            <PrivateRoute>
-              <Login />
-            </PrivateRoute>
-          }
-        />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+          <Route path="/" element={<Main />} />
+          <Route
+            path="movies/*"
+            element={
+              <PrivateRoute>
+                <Link to="/movies">Movies</Link>
+              </PrivateRoute>
+            }
+          />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </AppWrapper>
     </Router>
   );
 };
