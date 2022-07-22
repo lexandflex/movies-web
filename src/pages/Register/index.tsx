@@ -1,12 +1,16 @@
 import React, { ReactElement } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { AppInput } from '@components/AppInput';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AppButton } from '@components/AppButton';
+import { useDispatch } from 'react-redux';
+import { registerAction } from '@store/actions/auth';
 import { registerSchema } from './yupSchema';
 import { AppForm } from '../../components/AppForm';
+import { FormFields } from './types';
 
 export const Register = (): ReactElement => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -16,6 +20,7 @@ export const Register = (): ReactElement => {
   console.log({ errors });
   const onSubmit = (data: any) => {
     console.log({ data });
+    dispatch(registerAction.request({ email: data.email, password: data.password }));
   };
 
   return (

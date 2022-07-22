@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
+import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
 import * as Styled from './styles';
 
 const BIG_SIZE_LOGO_URL = 'https://www.freepnglogos.com/uploads/netflix-logo-0.png';

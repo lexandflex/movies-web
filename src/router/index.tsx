@@ -12,15 +12,6 @@ export const AppRouter: FC = (): ReactElement => {
     <Router>
       <AppWrapper>
         <Routes>
-          {/* <Route
-          path="/"
-          element={
-            <>
-              <div>main route</div>
-              <Link to="/movies">Movies</Link>
-            </>
-          }
-        /> */}
           <Route path="/" element={<Main />} />
           <Route
             path="movies/*"
