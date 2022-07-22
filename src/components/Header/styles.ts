@@ -43,7 +43,7 @@ export const Search = styled.div`
     padding: 0.5rem 1rem;
   }
 
-  @media (min-width: 577px) and (max-width: 768px) {
+  @media (min-width: 576px) and (max-width: 768px) {
     width: 12rem;
     margin-left: 4rem;
     border-radius: 40px;

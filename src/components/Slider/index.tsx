@@ -1,40 +1,36 @@
-import React, { useRef, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import * as Styles from './styles';
+import { Props } from './types';
 
-export const Slider = () => {
-  const [slides, setSlides] = useState([1, 2, 3, 4, 5, 6, 7, 8]);
-
+export const Slider: FC<Props> = ({ slides }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const sliderCardRef = useRef<HTMLDivElement>(null);
 
   const handleSlideRight = () => {
     if (sliderRef && sliderRef.current && sliderCardRef && sliderCardRef.current) {
-      sliderRef.current.scrollLeft += sliderCardRef.current.offsetWidth * 3;
+      sliderRef.current.scrollLeft += sliderCardRef.current.offsetWidth;
     }
   };
 
   const handleSlideLeft = () => {
     if (sliderRef && sliderRef.current && sliderCardRef && sliderCardRef.current) {
-      sliderRef.current.scrollLeft -= sliderCardRef.current.offsetWidth * 3;
+      sliderRef.current.scrollLeft -= sliderCardRef.current.offsetWidth;
     }
   };
 
   return (
     <Styles.Container>
-      <Styles.SliderContainer>
-        <Styles.SliderIconLeft size={40} onClick={handleSlideLeft} />
+      <Styles.SliderIconLeft onClick={handleSlideLeft} />
+      <Styles.SliderContainer ref={sliderCardRef}>
         <Styles.Slider ref={sliderRef}>
           {slides.map((slide) => (
-            <Styles.SliderCard ref={sliderCardRef} key={slide}>
-              <Styles.SlidercardImage
-                src="https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/4057c4b8-8208-4a04-b169-26b0661453e3/360"
-                alt="logo"
-              />
+            <Styles.SliderCard key={slide.id}>
+              <Styles.SlidercardImage src={slide.image} alt="logo" />
             </Styles.SliderCard>
           ))}
         </Styles.Slider>
-        <Styles.SliderIconRight size={40} onClick={handleSlideRight} />
       </Styles.SliderContainer>
+      <Styles.SliderIconRight onClick={handleSlideRight} />
     </Styles.Container>
   );
 };
