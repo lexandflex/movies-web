@@ -5,6 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { AppButton } from '@components/AppButton';
 import { useDispatch } from 'react-redux';
 import { registerAction } from '@store/actions/auth';
+import { Navigator } from '@services/navigatorService';
+import { RouteNames } from '@router/routeNames';
 import { registerSchema } from './yupSchema';
 import { AppForm } from '../../components/AppForm';
 import { FormFields } from './types';
@@ -24,30 +26,38 @@ export const Register = (): ReactElement => {
   };
 
   return (
-    <AppForm
-      title="Register"
-      onSubmit={handleSubmit(onSubmit)}
-      link={{ link: '/login', title: 'Login', text: 'Already have an account?' }}
-    >
-      <AppInput
-        error={errors?.email?.message as any as string}
-        placeholder="Email"
-        type="text"
-        {...register('email')}
+    <>
+      <AppForm
+        title="Register"
+        onSubmit={handleSubmit(onSubmit)}
+        link={{ link: '/login', title: 'Login', text: 'Already have an account?' }}
+      >
+        <AppInput
+          error={errors?.email?.message as any as string}
+          placeholder="Email"
+          type="text"
+          {...register('email')}
+        />
+        <AppInput
+          error={errors?.password?.message as any as string}
+          placeholder="Password"
+          type="password"
+          {...register('password')}
+        />
+        <AppInput
+          error={errors?.confirmPassword?.message as any as string}
+          placeholder="Confirm password"
+          type="password"
+          {...register('confirmPassword')}
+        />
+        <AppButton type="submit" title="Confirm" />
+      </AppForm>
+      <AppButton
+        title="test"
+        onClick={() => {
+          Navigator.push(RouteNames.MOVIES);
+        }}
       />
-      <AppInput
-        error={errors?.password?.message as any as string}
-        placeholder="Password"
-        type="password"
-        {...register('password')}
-      />
-      <AppInput
-        error={errors?.confirmPassword?.message as any as string}
-        placeholder="Confirm password"
-        type="password"
-        {...register('confirmPassword')}
-      />
-      <AppButton type="submit" title="Confirm" />
-    </AppForm>
+    </>
   );
 };

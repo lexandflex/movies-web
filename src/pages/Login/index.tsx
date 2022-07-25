@@ -3,10 +3,14 @@ import { useForm } from 'react-hook-form';
 import { AppInput } from '@components/AppInput';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AppButton } from '@components/AppButton';
+import { useDispatch } from 'react-redux';
+import { loginAction } from '@store/actions/auth';
+import { AppSpinner } from '@components/AppSpinner';
 import { loginSchema } from './yupSchema';
 import { AppForm } from '../../components/AppForm';
 
 export const Login = (): ReactElement => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -15,7 +19,7 @@ export const Login = (): ReactElement => {
 
   console.log({ errors });
   const onSubmit = (data: any) => {
-    console.log({ data });
+    dispatch(loginAction.request({ email: data.email, password: data.password }));
   };
 
   return (

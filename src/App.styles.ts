@@ -26,7 +26,7 @@ export const App = styled.div`
   flex-direction: column;
   text-align: left;
   background-color: ${(props) => props.theme.colors.backgroundColor};
-  height: 100%;
+  min-height: 100vh;
   flex: 1 1;
 `;
 
