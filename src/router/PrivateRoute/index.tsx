@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { isAuthenticatedSelector } from '../../store/selectors';
+import { isAuthenticatedSelector } from '../../store/selectors/auth';
 
 import { PrivateRouteProps } from './types';
 

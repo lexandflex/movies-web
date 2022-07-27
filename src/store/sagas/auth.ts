@@ -6,7 +6,7 @@ import {
   refreshTokensAction,
   registerAction,
   setTokenAction,
-} from '@store/actions/auth/auth';
+} from '@store/actions/auth';
 import { call, Effect, put, SagaReturnType, takeLatest } from 'redux-saga/effects';
 import { Navigator } from '@services/navigatorService';
 import { RouteNames } from '@router/routeNames';

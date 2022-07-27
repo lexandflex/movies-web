@@ -1,6 +1,7 @@
 import { AuthParams } from '@models/auth';
 import { ActionType, createAction, createAsyncAction } from 'typesafe-actions';
-import { ResponseType, ErrorType } from './types';
+
+import { Error } from '@models/common';
 
 export enum AuthTypes {
   Login = '[Auth] Login',
@@ -12,10 +13,10 @@ export enum AuthTypes {
   SetToken = '[Auth] SetToken',
   RefreshTokens = '[Auth] RefreshTokens',
   RefreshTokensSuccess = '[Auth] RefreshTokensSuccess',
-  RefreshTokensFailid = '[Auth] RefreshTokensFailid',
+  RefreshTokensFailed = '[Auth] RefreshTokensFailed',
   Logout = '[Auth] Logout',
   LogoutSuccess = '[Auth] LogoutSuccess',
-  LogoutFailid = '[Auth] LogoutFailid',
+  LogoutFailed = '[Auth] LogoutFailed',
 }
 
 export const setTokenAction = createAction(AuthTypes.SetToken)<{
@@ -28,25 +29,25 @@ export const loginAction = createAsyncAction(
   AuthTypes.Login,
   AuthTypes.LoginSuccess,
   AuthTypes.LoginFailed,
-)<AuthParams, ResponseType, ErrorType>();
+)<AuthParams, ResponseType, Error>();
 
 export const registerAction = createAsyncAction(
   AuthTypes.Register,
   AuthTypes.RegisterSuccess,
   AuthTypes.RegisterFailed,
-)<AuthParams, ResponseType, ErrorType>();
+)<AuthParams, ResponseType, Error>();
 
 export const refreshTokensAction = createAsyncAction(
   AuthTypes.RefreshTokens,
   AuthTypes.RefreshTokensSuccess,
-  AuthTypes.RefreshTokensFailid,
-)<undefined, ResponseType, ErrorType>();
+  AuthTypes.RefreshTokensFailed,
+)<undefined, ResponseType, Error>();
 
 export const logoutAction = createAsyncAction(
   AuthTypes.Logout,
   AuthTypes.LogoutSuccess,
-  AuthTypes.LogoutFailid,
-)<undefined, null, ErrorType>();
+  AuthTypes.LogoutFailed,
+)<undefined, null, Error>();
 
 export type AuthActionUnion =
   | ActionType<typeof setTokenAction>

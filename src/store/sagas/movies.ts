@@ -9,7 +9,7 @@ import {
   addRatingAction,
   getRatingAction,
   removeRatingAction,
-} from '../actions/movies/movies';
+} from '../actions/movies';
 
 export class MoviesSagaWorker {
   static *getTop({ payload }: ActionType<typeof getTopAction.request>) {

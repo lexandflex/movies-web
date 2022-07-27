@@ -1,8 +1,8 @@
-export type GetTopPayloadType = {
+export interface TopFilmsParams {
   page: number;
-};
+}
 
-export type TopFilmsType = {
+export interface TopFilmsResponse {
   pagesCount: number;
   films: [
     {
@@ -17,21 +17,21 @@ export type TopFilmsType = {
       posterUrlPreview: string | null;
     },
   ];
-};
+}
 
-export type GetByTitlePayloadType = {
+export interface FilmsByTitleParams {
   title: string;
-};
+}
 
-export type GetByTitleResponseType = {
+export interface FilmsByTitleResponse {
   filmsId: number[];
-};
+}
 
-export type FilmIdPayloadType = {
+export interface FilmByIdParams {
   id: number;
-};
+}
 
-export type FilmInfo = {
+export interface FilmByIdResponse {
   kinopoiskId: number;
   nameRu: string | null;
   nameEn: string | null;
@@ -51,9 +51,9 @@ export type FilmInfo = {
   genres: [{ genre: string | null }];
   startYear: number;
   endYear: number;
-};
+}
 
-export type InfoAboutSeasonsType = {
+export interface InfoAboutSeasonsResponse {
   total: number;
   items: [
     {
@@ -69,24 +69,20 @@ export type InfoAboutSeasonsType = {
       ];
     },
   ];
-};
+}
 
-export type AddRatingPayloadType = {
+export interface AddRatingParams {
   kinopoiskId: number;
   rating: number;
-};
+}
 
-export type MovieRatingType = {
+export interface MovieRatingResponse {
   kinopoiskId: number;
   totalRating: number;
   numberOfAppraisers: number;
   appraisers: [{ userId: string | null; rating: number }];
-};
+}
 
-export type KinopoiskIdType = {
+export interface KinopoiskId {
   kinopoiskId: number;
-};
-
-export type ErrorType = {
-  error: string;
-};
+}

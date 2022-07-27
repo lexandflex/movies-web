@@ -1,13 +1,16 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { authReducer, AuthState } from './auth';
-import { moviesReducer } from './movies';
+import { moviesReducer, MoviesState } from './movies';
+import { startAppReducer, StartAppState } from './startApp';
 
 export interface AppState {
   auth: AuthState;
-  movies: any;
+  movies: MoviesState;
+  startApp: StartAppState;
 }
 
 export const rootReducer = combineReducers({
+  startApp: startAppReducer,
   auth: authReducer,
   movies: moviesReducer,
 });

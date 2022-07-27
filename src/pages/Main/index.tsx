@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from '../../components/Slider';
-import { getTopAction } from '../../store/actions/movies/movies';
+import { getTopAction } from '../../store/actions/movies';
 import { State } from '../../store/reducers';
 
 export const Main: FC = () => {

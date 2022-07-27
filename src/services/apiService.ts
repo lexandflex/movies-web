@@ -1,7 +1,7 @@
 import { StorageKeys } from '@constants/storageKeys';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { store } from '..';
-import { refreshTokensAction } from '../store/actions/auth/auth';
+import { refreshTokensAction } from '../store/actions/auth';
 
 export class ApiService {
   static api: AxiosInstance;

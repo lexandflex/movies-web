@@ -5,7 +5,7 @@ import {
   refreshTokensAction,
   registerAction,
   setTokenAction,
-} from '@store/actions/auth/auth';
+} from '@store/actions/auth';
 import { createReducer } from 'typesafe-actions';
 
 export interface AuthState {

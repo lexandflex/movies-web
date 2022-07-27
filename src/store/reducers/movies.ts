@@ -1,5 +1,11 @@
 import { createReducer } from 'typesafe-actions';
 import {
+  TopFilmsResponse,
+  InfoAboutSeasonsResponse,
+  MovieRatingResponse,
+  FilmByIdResponse,
+} from '../../models/movies';
+import {
   addRatingAction,
   getByTitleAction,
   getInfoAboutFilmAction,
@@ -7,21 +13,15 @@ import {
   getTopAction,
   MoviesActionUnion,
   removeRatingAction,
-} from '../actions/movies/movies';
-import {
-  FilmInfo,
-  InfoAboutSeasonsType,
-  MovieRatingType,
-  TopFilmsType,
-} from '../actions/movies/types';
+} from '../actions/movies';
 
 export interface MoviesState {
-  topFilms: TopFilmsType;
+  topFilms: TopFilmsResponse;
   filmsId: number[];
   // infoAboutFilm: InfoAboutFilmType;
-  infoAboutSeasons: InfoAboutSeasonsType;
-  movieRating: MovieRatingType;
-  films: { [id: number]: FilmInfo };
+  infoAboutSeasons: InfoAboutSeasonsResponse;
+  movieRating: MovieRatingResponse;
+  films: { [id: number]: FilmByIdResponse };
 }
 
 const initialState: MoviesState = {
