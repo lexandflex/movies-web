@@ -4,11 +4,12 @@ export const Footer = styled.footer`
   background-color: ${(props) => props.theme.colors.secondBackgroundColor};
   width: 100%;
   display: flex;
-  height: 300px;
+  min-height: 400px;
 `;
 
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled.main`
   display: flex;
+  flex: 1 1 auto;
   padding: 20px;
   background-color: ${(props) => props.theme.colors.backgroundColor}; ;
 `;

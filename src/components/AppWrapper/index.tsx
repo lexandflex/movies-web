@@ -7,6 +7,8 @@ export const AppWrapper: FC<Props> = ({ children }) => (
   <>
     <Header />
     <Styled.ContentWrapper>{children}</Styled.ContentWrapper>
-    <Styled.Footer />
+    <Styled.Footer>
+      <div>footer</div>
+    </Styled.Footer>
   </>
 );
