@@ -4,7 +4,8 @@ import { AppInput } from '@components/AppInput';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AppButton } from '@components/AppButton';
 import { useDispatch } from 'react-redux';
-import { registerAction } from '@store/actions/auth';
+import { registerAction } from '@store/actions/auth/auth';
+import { Link } from 'react-router-dom';
 import { registerSchema } from './yupSchema';
 import { AppForm } from '../../components/AppForm';
 import { FormFields } from './types';
@@ -48,6 +49,7 @@ export const Register = (): ReactElement => {
         {...register('confirmPassword')}
       />
       <AppButton type="submit" title="Confirm" />
+      <Link to="/">Home</Link>
     </AppForm>
   );
 };

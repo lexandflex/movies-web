@@ -1,4 +1,11 @@
-import { AuthActionUnion, loginAction, registerAction, setTokenAction } from '@store/actions/auth';
+import {
+  AuthActionUnion,
+  loginAction,
+  logoutAction,
+  refreshTokensAction,
+  registerAction,
+  setTokenAction,
+} from '@store/actions/auth/auth';
 import { createReducer } from 'typesafe-actions';
 
 export interface AuthState {
@@ -41,7 +48,25 @@ export const authReducer = createReducer<AuthState, AuthActionUnion>(initialStat
     ...state,
     loading: false,
   }))
-  .handleAction(registerAction.failure, (state) => ({
+  .handleAction(registerAction.failure, (state, action) => ({
     ...state,
     loading: false,
+    error: action.payload.error,
+  }))
+  .handleAction(refreshTokensAction.request, (state) => ({
+    ...state,
+    loading: true,
+  }))
+  .handleAction(refreshTokensAction.success, (state) => ({ ...state, loading: false }))
+  .handleAction(refreshTokensAction.failure, (state, action) => ({
+    ...state,
+    loading: false,
+    error: action.payload.error,
+  }))
+  .handleAction(logoutAction.request, (state) => ({ ...state, loading: true }))
+  .handleAction(logoutAction.success, (state) => ({ ...state, loading: false }))
+  .handleAction(logoutAction.failure, (state, action) => ({
+    ...state,
+    loading: false,
+    error: action.payload.error,
   }));

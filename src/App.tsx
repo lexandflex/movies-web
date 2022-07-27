@@ -7,6 +7,7 @@ import { AppRouter } from './router';
 
 const App: FC = () => {
   useEffect(() => {
+    console.log('init');
     ApiService.init(APP_CONFIG.apiBaseUrl);
   }, []);
 
