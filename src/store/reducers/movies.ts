@@ -17,11 +17,11 @@ import {
 
 export interface MoviesState {
   topFilms: TopFilmsResponse;
-  filmsId: number[];
-  // infoAboutFilm: InfoAboutFilmType;
+  filmsIds: string[];
+  currentFilmId: string | null;
   infoAboutSeasons: InfoAboutSeasonsResponse;
   movieRating: MovieRatingResponse;
-  films: { [id: number]: FilmByIdResponse };
+  films: { [id: string]: FilmByIdResponse };
 }
 
 const initialState: MoviesState = {
@@ -41,8 +41,8 @@ const initialState: MoviesState = {
       },
     ],
   },
-
-  filmsId: [],
+  currentFilmId: null,
+  filmsIds: [],
   films: {},
   infoAboutSeasons: {
     total: 0,
@@ -91,7 +91,6 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
   .handleAction(getByTitleAction.success, (state, action) => ({
     ...state,
     loading: false,
-    filmsId: action.payload.filmsId,
   }))
   .handleAction(getByTitleAction.failure, (state, action) => ({
     ...state,
@@ -105,7 +104,11 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
   .handleAction(getInfoAboutFilmAction.success, (state, action) => ({
     ...state,
     loading: false,
-    infoAboutFilm: action.payload,
+    films: {
+      [action.payload.kinopoiskId]: action.payload,
+    },
+    filmsIds: [...state.filmsIds, `${action.payload.kinopoiskId}`],
+    currentFilmId: `${action.payload.kinopoiskId}`,
   }))
   .handleAction(getInfoAboutFilmAction.failure, (state, action) => ({
     ...state,

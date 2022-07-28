@@ -10,7 +10,7 @@ export interface Theme {
     secondBackgroundColor: string;
   };
 }
-
+// #d9d7e0 - text color
 export const darkTheme: Theme = {
   colors: {
     accentColor: '#e32652',

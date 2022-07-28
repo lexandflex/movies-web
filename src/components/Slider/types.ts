@@ -1,3 +1,4 @@
 export interface Props {
-  slides: { id: number; image: string }[];
+  slides: { id: string; image: string }[];
+  onClick?: (id: string) => void;
 }

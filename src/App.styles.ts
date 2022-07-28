@@ -1,11 +1,5 @@
 import styled, { createGlobalStyle, css } from 'styled-components';
 
-const bodyStyles = css`
-  font-family: DM Sans, sans-serif;
-  padding: 0;
-  margin: 0;
-`;
-
 const inputStyles = css`
   border: none;
   outline: none;
@@ -14,7 +8,12 @@ const inputStyles = css`
 export const GlobalStyles = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
 body {
-  ${bodyStyles}
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: DM Sans, sans-serif;
+  }
 }
 input[type=text], input[type=password] {
   ${inputStyles}

@@ -76,6 +76,7 @@ export const SliderIconRight = styled(MdChevronRight)`
 
 export const SliderCard = styled.div`
   /* width: 250px; */
+  cursor: pointer;
   width: 19%;
   height: 100%;
   border-radius: 10px;
@@ -96,7 +97,7 @@ export const SliderCard = styled.div`
   }
 `;
 
-export const SlidercardImage = styled.img`
+export const SliderCardImage = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 10px;

@@ -102,4 +102,5 @@ export class MoviesSagaWorker {
 
 export function* moviesSaga(): Generator<Effect, void> {
   yield takeLatest(getTopAction.request, MoviesSagaWorker.getTop);
+  yield takeLatest(getInfoAboutFilmAction.request, MoviesSagaWorker.getInfoAboutFilm);
 }
