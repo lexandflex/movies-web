@@ -12,12 +12,13 @@ export const ErrorContainer = styled.div`
   margin: 8px 0;
 `;
 
-export const Input = styled.input`
-  padding: 8px;
+export const Input = styled.input<{ fontSize: number }>`
+  font-size: ${(props) => props.fontSize}px;
+  padding: 16px;
   margin: 8px 0;
   border-radius: 8px;
   box-sizing: border-box;
-  height: 40px;
+  height: 100%;
 
   &:focus {
     border: 1px solid;

@@ -26,38 +26,30 @@ export const Register = (): ReactElement => {
   };
 
   return (
-    <>
-      <AppForm
-        title="Register"
-        onSubmit={handleSubmit(onSubmit)}
-        link={{ link: '/login', title: 'Login', text: 'Already have an account?' }}
-      >
-        <AppInput
-          error={errors?.email?.message as any as string}
-          placeholder="Email"
-          type="text"
-          {...register('email')}
-        />
-        <AppInput
-          error={errors?.password?.message as any as string}
-          placeholder="Password"
-          type="password"
-          {...register('password')}
-        />
-        <AppInput
-          error={errors?.confirmPassword?.message as any as string}
-          placeholder="Confirm password"
-          type="password"
-          {...register('confirmPassword')}
-        />
-        <AppButton type="submit" title="Confirm" />
-      </AppForm>
-      <AppButton
-        title="test"
-        onClick={() => {
-          Navigator.push(RouteNames.MOVIES);
-        }}
+    <AppForm
+      title="Register"
+      onSubmit={handleSubmit(onSubmit)}
+      link={{ link: '/login', title: 'Login', text: 'Already have an account?' }}
+    >
+      <AppInput
+        error={errors?.email?.message as any as string}
+        placeholder="Email"
+        type="text"
+        {...register('email')}
       />
-    </>
+      <AppInput
+        error={errors?.password?.message as any as string}
+        placeholder="Password"
+        type="password"
+        {...register('password')}
+      />
+      <AppInput
+        error={errors?.confirmPassword?.message as any as string}
+        placeholder="Confirm password"
+        type="password"
+        {...register('confirmPassword')}
+      />
+      <AppButton type="submit" title="Confirm" />
+    </AppForm>
   );
 };

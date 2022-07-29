@@ -9,3 +9,8 @@ export const currentFilmIdSelector = createSelector(
   moviesStateSelector,
   (state) => state.currentFilmId,
 );
+
+export const searchedFilmsSelector = createSelector(
+  moviesStateSelector,
+  (state) => state.searchedFilms?.films,
+);

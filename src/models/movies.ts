@@ -21,10 +21,27 @@ export interface TopFilmsResponse {
 
 export interface FilmsByTitleParams {
   title: string;
+  page: number;
 }
 
 export interface FilmsByTitleResponse {
-  filmsIds: number[];
+  keyword: string;
+  pagesCount: number;
+  films: {
+    filmId: number;
+    nameRu: string | null;
+    nameEn: string | null;
+    type: string | null;
+    year: string | null;
+    description: string | null;
+    filmLength: string | null;
+    countries: [{ country: string | null }];
+    genres: [{ genre: string | null }];
+    posterUrl: string | null;
+    posterUrlPreview: string | null;
+    rating: string | null;
+    ratingVoteCount: number | null;
+  }[];
 }
 
 export interface FilmByIdParams {

@@ -29,6 +29,7 @@ export class MoviesSagaWorker {
       const response: SagaReturnType<typeof MoviesService.getByTitle> = yield call(
         MoviesService.getByTitle,
         payload.title,
+        payload.page,
       );
 
       yield put(getByTitleAction.success(response.data));
@@ -102,5 +103,6 @@ export class MoviesSagaWorker {
 
 export function* moviesSaga(): Generator<Effect, void> {
   yield takeLatest(getTopAction.request, MoviesSagaWorker.getTop);
+  yield takeLatest(getByTitleAction.request, MoviesSagaWorker.getByTitle);
   yield takeLatest(getInfoAboutFilmAction.request, MoviesSagaWorker.getInfoAboutFilm);
 }

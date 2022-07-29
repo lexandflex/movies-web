@@ -1,4 +1,8 @@
+import { SearchModal } from '@components/SearchModal';
+import { getByTitleAction } from '@store/actions/movies';
+import { searchedFilmsSelector } from '@store/selectors';
 import React, { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
 import * as Styled from './styles';
@@ -10,10 +14,17 @@ const SEARCH_PLACEHOLDER = "I'm searching for...";
 
 const DROPDOWN_LINKS = [{ title: 'Logout', link: '' }];
 
+const pageNumber = 1;
+
 export const Header = () => {
-  const [title, setTitle] = useState('');
+  const dispatch = useDispatch();
   const [showInput, setShowInput] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
+
+  const foundFilms = useSelector(searchedFilmsSelector);
+
+  console.log({ foundFilms });
 
   const { width } = useWindowDimensions();
 
@@ -24,12 +35,16 @@ export const Header = () => {
     return <img src={SMALL_SIZE_LOGO_URL} alt="Netflix" height="45" width="60" />;
   }, [width]);
 
-  const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setTitle(event.currentTarget.value);
+  const handleSearchClick = () => {
+    setShowSearchModal(true);
+  };
+
+  const handleCancelSearch = () => {
+    setShowSearchModal(false);
   };
 
   const handleOpenCloseInputTitle = () => {
-    setShowInput((prewState) => !prewState);
+    setShowInput((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -38,24 +53,27 @@ export const Header = () => {
     }
   }, [width, showInput]);
 
-  const handleOpenCloseDropdown = () => {
-    setShowDropdown((prewState) => !prewState);
+  const onSearch = (title: string) => {
+    title.length && dispatch(getByTitleAction.request({ title, page: pageNumber }));
   };
+
+  const handleOpenCloseDropdown = () => {
+    setShowDropdown((prevState) => !prevState);
+  };
+
+  const SearchComponent = (
+    <Styled.Search>
+      <Styled.SearchIcon />
+      <input type="text" placeholder={SEARCH_PLACEHOLDER} onClick={handleSearchClick} />
+    </Styled.Search>
+  );
 
   return (
     <>
       {showInput && (
         <Styled.MobileSearchContainer>
           <Styled.GoBackIcon onClick={handleOpenCloseInputTitle} />
-          <Styled.Search>
-            <Styled.SearchIcon />
-            <input
-              type="text"
-              placeholder={SEARCH_PLACEHOLDER}
-              value={title}
-              onChange={handleChangeTitle}
-            />
-          </Styled.Search>
+          {SearchComponent}
         </Styled.MobileSearchContainer>
       )}
       {!showInput && (
@@ -63,15 +81,7 @@ export const Header = () => {
           <Link to="/">{LogoImg}</Link>
 
           {width > 576 ? (
-            <Styled.Search>
-              <Styled.SearchIcon />
-              <input
-                type="text"
-                placeholder={SEARCH_PLACEHOLDER}
-                value={title}
-                onChange={handleChangeTitle}
-              />
-            </Styled.Search>
+            SearchComponent
           ) : (
             <Styled.SearchButton>
               <Styled.SearchIcon onClick={handleOpenCloseInputTitle} />
@@ -92,6 +102,7 @@ export const Header = () => {
           </Styled.Profile>
         </Styled.Container>
       )}
+      {showSearchModal && <SearchModal onClose={handleCancelSearch} handleSearch={onSearch} />}
     </>
   );
 };

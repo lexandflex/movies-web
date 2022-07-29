@@ -38,7 +38,7 @@ export const Movie: FC = () => {
         <AppText text={`Год выпуска: ${currentFilm?.year || ''}`} />
         <AppText text={`Кинопоиск : ${currentFilm?.ratingKinopoisk || ''}`} />
         <AppText text={`IMDB : ${currentFilm?.ratingImdb || ''}`} />
-        {currentFilm.genres.map(({ genre }) => (
+        {currentFilm?.genres?.map(({ genre }) => (
           <AppText key={genre} text={genre || ''} />
         ))}
         <AppText text={`${currentFilm?.ratingAgeLimits}+`} />

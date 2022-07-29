@@ -2,12 +2,11 @@ import { ApiService } from './apiService';
 
 export class MoviesService {
   static async getTop(page: number) {
-    console.log({ api: ApiService.api });
     return ApiService.api.get(`/movies/top?page=${page}`);
   }
 
-  static async getByTitle(title: string) {
-    return ApiService.api.get(`/movies/${title}`);
+  static async getByTitle(title: string, page: number) {
+    return ApiService.api.get(`/movies?title=${encodeURI(title)}&page=${page}`);
   }
 
   static async getInformationAboutTheFilmById(id: string) {

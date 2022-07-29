@@ -1,10 +1,12 @@
 import { createReducer } from 'typesafe-actions';
 import {
+  FilmsByTitleResponse,
   TopFilmsResponse,
   InfoAboutSeasonsResponse,
   MovieRatingResponse,
   FilmByIdResponse,
 } from '../../models/movies';
+
 import {
   addRatingAction,
   getByTitleAction,
@@ -22,6 +24,7 @@ export interface MoviesState {
   infoAboutSeasons: InfoAboutSeasonsResponse;
   movieRating: MovieRatingResponse;
   films: { [id: string]: FilmByIdResponse };
+  searchedFilms: FilmsByTitleResponse;
 }
 
 const initialState: MoviesState = {
@@ -61,6 +64,7 @@ const initialState: MoviesState = {
       },
     ],
   },
+  searchedFilms: { films: [], keyword: '', pagesCount: 0 },
   movieRating: {
     kinopoiskId: 0,
     totalRating: 0,
@@ -91,11 +95,13 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
   .handleAction(getByTitleAction.success, (state, action) => ({
     ...state,
     loading: false,
+    searchedFilms: action.payload,
   }))
   .handleAction(getByTitleAction.failure, (state, action) => ({
     ...state,
     loading: false,
     error: action.payload.error,
+    searchedFilms: initialState.searchedFilms,
   }))
   .handleAction(getInfoAboutFilmAction.request, (state) => ({
     ...state,
@@ -107,7 +113,7 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
     films: {
       [action.payload.kinopoiskId]: action.payload,
     },
-    filmsIds: [...state.filmsIds, `${action.payload.kinopoiskId}`],
+    filmsIds: [...new Set([...state.filmsIds, `${action.payload.kinopoiskId}`])],
     currentFilmId: `${action.payload.kinopoiskId}`,
   }))
   .handleAction(getInfoAboutFilmAction.failure, (state, action) => ({
