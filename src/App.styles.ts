@@ -27,12 +27,3 @@ export const App = styled.div`
   min-height: 100vh;
   flex: 1 1;
 `;
-
-// @keyframes App-logo-spin {
-//   from {
-//     transform: rotate(0deg);
-//   }
-//   to {
-//     transform: rotate(360deg);
-//   }
-// }
