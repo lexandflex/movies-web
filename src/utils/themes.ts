@@ -8,6 +8,7 @@ export interface Theme {
     thirdTextColor: string;
     backgroundColor: string;
     secondBackgroundColor: string;
+    ratingStarColor: string;
   };
 }
 // #d9d7e0 - text color
@@ -21,6 +22,7 @@ export const darkTheme: Theme = {
     thirdTextColor: '#f2f2f2',
     backgroundColor: '#0e101c',
     secondBackgroundColor: '#030303',
+    ratingStarColor: '#ffcd3c',
   },
 };
 
@@ -34,6 +36,7 @@ export const lightTheme: Theme = {
     thirdTextColor: '#f2f2f2',
     backgroundColor: '#1e2a4a',
     secondBackgroundColor: '#030303',
+    ratingStarColor: '#ffcd3c',
   },
 };
 

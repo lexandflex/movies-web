@@ -31,16 +31,13 @@ export const Main: FC = () => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const handleShowModel = () => {
+  const handleShowModal = () => {
     setShowModal(!showModal);
   };
 
   return (
     <>
-      <Slider slides={slides} onClick={handleSlideClick} />
-      <button type="button" onClick={handleShowModel}>
-        Modal
-      </button>
+      <Slider slides={slides} onClick={handleSlideClick} handleShowModal={handleShowModal} />
       <Modal showModal={showModal} onClose={setShowModal} title="Rating" text="Rate the movie">
         <Styled.RatingBlock>
           {RATING_ITEMS.map((ratingItem) => (

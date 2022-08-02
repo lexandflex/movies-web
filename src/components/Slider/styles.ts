@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { MdChevronLeft, MdChevronRight, MdStarOutline } from 'react-icons/md';
 
 export const Container = styled.div`
   width: 100%;
@@ -39,14 +39,13 @@ export const Slider = styled.div`
 `;
 
 const SliderIcon = css`
-  /* background-color: white;
-  border-radius: 100%; */
   position: absolute;
-  /* opacity: 0.5; */
+  opacity: 0.7;
   cursor: pointer;
   font-size: 2rem;
   z-index: 2;
   color: white;
+  transition: 0.2s;
   &:hover {
     opacity: 1;
   }
@@ -74,8 +73,50 @@ export const SliderIconRight = styled(MdChevronRight)`
   }
 `;
 
+export const SliderCardInfo = styled.div`
+  position: absolute;
+  width: 80%;
+  bottom: 10%;
+  left: 10%;
+	z-index: 3;
+	opacity: 0;
+	transform: translateY(35%);
+	transition: 0.5s;
+
+  & p {
+    color: ${(props) => props.theme.colors.secondTextColor};
+  }
+
+  & button {
+    margin-top: 10%;
+
+    p {
+      color: initial;
+    }
+  }
+`;
+
+export const SliderIconStar = styled(MdStarOutline)`
+  cursor: pointer;
+  position: absolute;
+  right: 7%;
+  top: 3%;
+  opacity: 0;
+  font-size: 2rem;
+  z-index: 3;
+  transform: translateX(50%);
+  transition: 0.5s;
+
+  &:hover {
+    fill: ${(props) => props.theme.colors.ratingStarColor};
+  }
+
+  @media (max-width: 992px) {
+    font-size: 1rem;
+  }
+`;
+
 export const SliderCard = styled.div`
-  /* width: 250px; */
   width: 19%;
   height: 100%;
   border-radius: 10px;
@@ -102,9 +143,12 @@ export const SliderCard = styled.div`
     &:before {
       opacity: 0.6;
     }
-    div {
+    ${SliderCardInfo}, ${SliderIconStar} {
       opacity: 1;
       transform: translateY(0);
+    }
+    ${SliderIconStar} {
+      transform: rotate(144deg);
     }
   }
 
@@ -126,27 +170,4 @@ export const SliderCardImage = styled.img`
   height: 100%;
   border-radius: 10px;
   object-fit: cover;
-`;
-
-export const SliderCardInfo = styled.div`
-  position: absolute;
-  width: 80%;
-  bottom: 10%;
-  left: 10%;
-	z-index: 3;
-	opacity: 0;
-	transform: translateY(35%);
-	transition: 0.5s;
-
-  & p {
-    color: ${(props) => props.theme.colors.secondTextColor};
-  }
-
-  & button {
-    margin-top: 10%;
-
-    p {
-      color: initial;
-    }
-  }
 `;
