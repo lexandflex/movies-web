@@ -11,7 +11,7 @@ export const ButtonContainer = styled.button<{ themeColor: keyof Theme['colors']
   transition: 0.17s;
 
   &:hover {
-    opacity: 0.9;
+    opacity: 0.8;
   }
 `;
 

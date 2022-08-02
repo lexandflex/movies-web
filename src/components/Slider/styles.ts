@@ -76,13 +76,37 @@ export const SliderIconRight = styled(MdChevronRight)`
 
 export const SliderCard = styled.div`
   /* width: 250px; */
-  cursor: pointer;
   width: 19%;
   height: 100%;
   border-radius: 10px;
+  position: relative;
   display: inline-block;
   padding-right: 0.5%;
   padding-left: 0.5%;
+  transition: 0.4s ease-out;
+
+  &:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: block;
+    border-radius: 10px;
+    background-color: black;
+    opacity: 0;
+    transition: 0.5s;
+  }
+
+  &:hover {
+    transform: translateY(-2%);
+    &:before {
+      opacity: 0.6;
+    }
+    div {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   @media (min-width: 768px) and (max-width: 992px) {
     width: 24%;
@@ -102,4 +126,27 @@ export const SliderCardImage = styled.img`
   height: 100%;
   border-radius: 10px;
   object-fit: cover;
+`;
+
+export const SliderCardInfo = styled.div`
+  position: absolute;
+  width: 80%;
+  bottom: 10%;
+  left: 10%;
+	z-index: 3;
+	opacity: 0;
+	transform: translateY(35%);
+	transition: 0.5s;
+
+  & p {
+    color: ${(props) => props.theme.colors.secondTextColor};
+  }
+
+  & button {
+    margin-top: 10%;
+
+    p {
+      color: initial;
+    }
+  }
 `;
