@@ -6,6 +6,7 @@ export const Footer = styled.footer`
   display: flex;
   min-height: 400px;
   color: ${(props) => props.theme.colors.textColor};
+  padding: 20px;
 `;
 
 export const ContentWrapper = styled.main`
