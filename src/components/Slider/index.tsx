@@ -36,7 +36,7 @@ export const Slider: FC<Props> = ({ slides, onClick, handleShowModal }) => {
               <Styles.SliderCardImage src={slide.image} alt="logo" />
               <Styles.SliderIconStar title='Оценить' onClick={handleShowModal} />
               <Styles.SliderCardInfo>
-                <AppText text={slide.name} size='lg' tag='h1' />
+                <AppText text={slide.name} tag='h1' />
                 <AppText text={slide.countries} />
                 <AppText text={slide.year} />
                 <AppText text={slide.genres} />

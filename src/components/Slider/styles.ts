@@ -76,7 +76,7 @@ export const SliderIconRight = styled(MdChevronRight)`
 export const SliderCardInfo = styled.div`
   position: absolute;
   width: 80%;
-  bottom: 10%;
+  bottom: 8%;
   left: 10%;
 	z-index: 3;
 	opacity: 0;
@@ -87,17 +87,18 @@ export const SliderCardInfo = styled.div`
     white-space: normal;
     line-height: 1.2;
     margin-bottom: 1rem;
+    font-size: 2vw;
   }
 
   & p {
     color: ${(props) => props.theme.colors.secondTextColor};
     margin-top: 0.2rem;
     white-space: normal;
+    font-size: 0.9vw;
   }
 
   & button {
     margin-top: 10%;
-
     p {
       color: initial;
     }
