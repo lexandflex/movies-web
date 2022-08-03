@@ -19,6 +19,39 @@ export interface TopFilmsResponse {
   ];
 }
 
+export interface Genre {
+  id: number;
+  genre: string;
+}
+
+export interface Genres {
+  genres: Genre[];
+}
+
+export interface GetByGenreParams {
+  genreId: string;
+}
+
+export interface MoviesByGenre {
+  total: number;
+  totalPages: number;
+  items: {
+    kinopoiskId: number;
+    imdbId: number;
+    nameRu: string | null;
+    nameEn: string | null;
+    nameOriginal: string | null;
+    countries: { country: string | null }[];
+    genres: { genre: string | null }[];
+    ratingKinopoisk: number;
+    ratingImdb: number;
+    year: number;
+    type: string | null;
+    posterUrl: string | null;
+    posterUrlPreview: string | null;
+  }[];
+}
+
 export interface FilmsByTitleParams {
   title: string;
   page: number;

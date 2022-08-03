@@ -9,6 +9,14 @@ export class MoviesService {
     return ApiService.api.get(`/movies?title=${encodeURI(title)}&page=${page}`);
   }
 
+  static async getGenres() {
+    return ApiService.api.get('/movies/genres');
+  }
+
+  static async getMoviesByGenre(genreId: string) {
+    return ApiService.api.get(`/movies/search-by-genre?genreId=${genreId}`);
+  }
+
   static async getInformationAboutTheFilmById(id: string) {
     return ApiService.api.get(`/movies/about-film/${id}`);
   }

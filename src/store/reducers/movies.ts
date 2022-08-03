@@ -5,11 +5,15 @@ import {
   InfoAboutSeasonsResponse,
   MovieRatingResponse,
   FilmByIdResponse,
+  MoviesByGenre,
+  Genre,
 } from '../../models/movies';
 
 import {
   addRatingAction,
+  getByGenreAction,
   getByTitleAction,
+  getGenresAction,
   getInfoAboutFilmAction,
   getInfoAboutSeasonsAction,
   getTopAction,
@@ -25,6 +29,8 @@ export interface MoviesState {
   movieRating: MovieRatingResponse;
   films: { [id: string]: FilmByIdResponse };
   searchedFilms: FilmsByTitleResponse;
+  genres: Genre[];
+  moviesByGenre: MoviesByGenre;
 }
 
 const initialState: MoviesState = {
@@ -71,6 +77,28 @@ const initialState: MoviesState = {
     numberOfAppraisers: 0,
     appraisers: [{ userId: null, rating: 0 }],
   },
+  genres: [],
+  moviesByGenre: {
+    total: 0,
+    totalPages: 0,
+    items: [
+      {
+        kinopoiskId: 0,
+        imdbId: 0,
+        nameRu: null,
+        nameEn: null,
+        nameOriginal: null,
+        countries: [{ country: null }],
+        genres: [{ genre: null }],
+        ratingKinopoisk: 0,
+        ratingImdb: 0,
+        year: 0,
+        type: null,
+        posterUrl: null,
+        posterUrlPreview: null,
+      },
+    ],
+  },
 };
 
 export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initialState)
@@ -84,6 +112,34 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
     topFilms: action.payload,
   }))
   .handleAction(getTopAction.failure, (state, action) => ({
+    ...state,
+    loading: false,
+    error: action.payload.error,
+  }))
+  .handleAction(getGenresAction.request, (state) => ({
+    ...state,
+    loading: true,
+  }))
+  .handleAction(getGenresAction.success, (state, action) => ({
+    ...state,
+    loading: false,
+    genres: action.payload.genres,
+  }))
+  .handleAction(getGenresAction.failure, (state, action) => ({
+    ...state,
+    loading: false,
+    error: action.payload.error,
+  }))
+  .handleAction(getByGenreAction.request, (state) => ({
+    ...state,
+    loading: true,
+  }))
+  .handleAction(getByGenreAction.success, (state, action) => ({
+    ...state,
+    loading: false,
+    moviesByGenre: action.payload,
+  }))
+  .handleAction(getByGenreAction.failure, (state, action) => ({
     ...state,
     loading: false,
     error: action.payload.error,

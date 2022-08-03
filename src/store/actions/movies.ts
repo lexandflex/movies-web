@@ -11,12 +11,23 @@ import {
   AddRatingParams,
   InfoAboutSeasonsResponse,
   KinopoiskId,
+  Genres,
+  GetByGenreParams,
+  MoviesByGenre,
 } from '@models/movies';
 
 export enum MoviesTypes {
   GetTop = '[Movies] GetTop',
   GetTopSuccess = '[Movies] GetTopSuccess',
   GetTopFailed = '[Movies] GetTopFailed',
+
+  GetGenres = '[Movies] GetGenres',
+  GetGenresSuccess = '[Movies] GetGenresSuccess',
+  GetGenresFailed = '[Movies] GetGenresFailed',
+
+  GetByGenre = '[Movies] GetByGenre',
+  GetByGenreSuccess = '[Movies] GetByGenreSuccess',
+  GetByGenreFailed = '[Movies] GetByGenreFailed',
 
   GetByTitle = '[Movies] GetByTitle',
   GetByTitleSuccess = '[Movies] GetByTitleSuccess',
@@ -48,6 +59,18 @@ export const getTopAction = createAsyncAction(
   MoviesTypes.GetTopSuccess,
   MoviesTypes.GetTopFailed,
 )<TopFilmsParams, TopFilmsResponse, Error>();
+
+export const getGenresAction = createAsyncAction(
+  MoviesTypes.GetGenres,
+  MoviesTypes.GetGenresSuccess,
+  MoviesTypes.GetGenresFailed,
+)<undefined, Genres, Error>();
+
+export const getByGenreAction = createAsyncAction(
+  MoviesTypes.GetByGenre,
+  MoviesTypes.GetByGenreSuccess,
+  MoviesTypes.GetByGenreFailed,
+)<GetByGenreParams, MoviesByGenre, Error>();
 
 export const getByTitleAction = createAsyncAction(
   MoviesTypes.GetByTitle,
@@ -87,6 +110,8 @@ export const removeRatingAction = createAsyncAction(
 
 export type MoviesActionUnion =
   | ActionType<typeof getTopAction>
+  | ActionType<typeof getGenresAction>
+  | ActionType<typeof getByGenreAction>
   | ActionType<typeof getByTitleAction>
   | ActionType<typeof getInfoAboutFilmAction>
   | ActionType<typeof getInfoAboutSeasonsAction>

@@ -9,6 +9,8 @@ import {
   addRatingAction,
   getRatingAction,
   removeRatingAction,
+  getGenresAction,
+  getByGenreAction,
 } from '../actions/movies';
 
 export class MoviesSagaWorker {
@@ -21,6 +23,29 @@ export class MoviesSagaWorker {
       yield put(getTopAction.success(response.data));
     } catch (error: any) {
       yield put(getTopAction.failure({ error: error.message }));
+    }
+  }
+
+  static *getGenres() {
+    try {
+      const response: SagaReturnType<typeof MoviesService.getGenres> = yield call(
+        MoviesService.getGenres,
+      );
+      yield put(getGenresAction.success(response.data));
+    } catch (error: any) {
+      yield put(getGenresAction.failure({ error: error.message }));
+    }
+  }
+
+  static *getByGenre({ payload }: ActionType<typeof getByGenreAction.request>) {
+    try {
+      const response: SagaReturnType<typeof MoviesService.getMoviesByGenre> = yield call(
+        MoviesService.getMoviesByGenre,
+        payload.genreId,
+      );
+      yield put(getByGenreAction.success(response.data));
+    } catch (error: any) {
+      yield put(getByGenreAction.failure({ error: error.message }));
     }
   }
 
