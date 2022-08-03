@@ -83,8 +83,16 @@ export const SliderCardInfo = styled.div`
 	transform: translateY(35%);
 	transition: 0.5s;
 
+  & h1 {
+    white-space: normal;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
   & p {
     color: ${(props) => props.theme.colors.secondTextColor};
+    margin-top: 0.2rem;
+    white-space: normal;
   }
 
   & button {

@@ -21,7 +21,14 @@ export const Main: FC = () => {
 
   const slides = useMemo(
     () =>
-      movies.films.map((film) => ({ id: `${film.filmId}`, image: film.posterUrlPreview || '' })),
+      movies.films.map((film) => ({
+        id: `${film.filmId}`,
+        image: film.posterUrlPreview || '',
+        name: film.nameRu || '',
+        year: film.year || '',
+        genres: film.genres.map(genre => genre.genre).join(', ') || '',
+        countries: film.countries.map(country => country.country).join(', ') || '',
+      })),
     [movies],
   );
 
