@@ -80,21 +80,21 @@ export const SliderCardInfo = styled.div`
   left: 10%;
 	z-index: 3;
 	opacity: 0;
-	transform: translateY(35%);
+	transform: translateY(25px);
 	transition: 0.5s;
 
   & h1 {
     white-space: normal;
     line-height: 1.2;
     margin-bottom: 1rem;
-    font-size: 2vw;
+    font-size: clamp(18px, 2vw, 42px);
   }
 
   & p {
     color: ${(props) => props.theme.colors.secondTextColor};
     margin-top: 0.2rem;
     white-space: normal;
-    font-size: 0.9vw;
+    font-size: clamp(12px, 0.9vw, 18px);
   }
 
   & button {

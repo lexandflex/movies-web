@@ -24,8 +24,4 @@ export const Input = styled.input<{ fontSize: number }>`
     background-color: ${(props) => props.theme.colors.textColor};
     box-shadow: 0 0 0 2px ${(props) => props.theme.colors.accentColor};
   }
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
 `;

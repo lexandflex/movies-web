@@ -22,6 +22,13 @@ export const Search = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+
+  & input {
+    margin-top: 2rem;
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
 `;
 
 export const IconWrapper = styled.div`
