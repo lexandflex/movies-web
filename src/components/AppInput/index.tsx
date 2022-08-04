@@ -8,10 +8,11 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   style?: Record<string, any>;
   fontSize?: Size | number;
+  focus?: boolean;
 }
 
 export const AppInput = forwardRef<HTMLInputElement, InputProps>(
-  ({ leftIcon, style, fontSize = 'sm', error, ...props }, ref) => (
+  ({ leftIcon, style, focus, fontSize = 'sm', error, ...props }, ref) => (
     <Styled.InputContainer>
       {leftIcon || null}
       <Styled.Input
@@ -19,6 +20,7 @@ export const AppInput = forwardRef<HTMLInputElement, InputProps>(
         style={style}
         {...props}
         ref={ref}
+        autoFocus={focus}
       />
       {error && <Styled.ErrorContainer>{error}</Styled.ErrorContainer>}
     </Styled.InputContainer>

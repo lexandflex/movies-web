@@ -9,86 +9,36 @@ export const Container = styled.div`
   align-items: center;
   padding: 1rem 3rem;
   margin-bottom: 6%;
+  justify-content: space-between;
 
   @media (max-width: 576px) {
     padding: 0.5rem 1rem;
   }
 `;
 
-export const MobileSearchContainer = styled(Container)`
-  width: 100%;
-  padding: 0.5rem 0.5rem;
-`;
-
-export const Search = styled.div`
+export const SearchWrapper = styled.div`
   display: flex;
-  border: 1px solid ${(props) => props.theme.colors.thirdTextColor};
-  background-color: ${(props) => props.theme.colors.secondBackgroundColor};
-  /* opacity: 0.5; */
-
-  input {
-    width: 100%;
-    background-color: transparent;
-    outline: none;
-    color: ${(props) => props.theme.colors.thirdTextColor};
-    margin-left: 0.5rem;
-    border: none;
-    &::placeholder {
-      color: ${(props) => props.theme.colors.thirdTextColor};
-    }
-  }
-
-  @media (max-width: 576px) {
-    width: 70%;
-    margin-left: 0.5rem;
-    border-radius: 40px;
-    padding: 0.5rem 1rem;
-  }
-
-  @media (min-width: 576px) and (max-width: 768px) {
-    width: 12rem;
-    margin-left: 4rem;
-    border-radius: 40px;
-    padding: 0.5rem 1rem;
-  }
-
-  @media (min-width: 768px) and (max-width: 992px) {
-    width: 17rem;
-    margin-left: 5rem;
-    border-radius: 40px;
-    padding: 0.5rem 1rem;
-  }
-
-  @media (min-width: 992px) {
-    width: 17rem;
-    margin-left: 10rem;
-    border-radius: 40px;
-    padding: 0.5rem 1rem;
-  }
-`;
-
-export const SearchButton = styled.div`
-  display: flex;
-  border: 1px solid ${(props) => props.theme.colors.thirdTextColor};
-  background-color: ${(props) => props.theme.colors.secondBackgroundColor};
-  /* opacity: 0.5; */
-
-  width: 2.5rem;
-  height: 2.5rem;
+  opacity: 0.6;
+  transition: 0.2s;
+  cursor: pointer;
   position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
+  right: calc(70px + 8vw);
 
-  svg {
-    margin: 0 auto;
+  & h2 {
+    letter-spacing: 0.6px;
+    margin-left: 0.4rem;
+    line-height: 24px;
+  }
+
+  &:hover {
+    opacity: 1;
   }
 `;
 
 export const SearchIcon = styled(TbSearch)`
   color: ${(props) => props.theme.colors.thirdTextColor};
+  width: 1.5rem;
+  height: 1.5rem;
 `;
 
 export const UserIcon = styled(FaRegUser)`
@@ -99,21 +49,23 @@ export const UserIcon = styled(FaRegUser)`
 
 export const GoBackIcon = styled(BiArrowBack)`
   color: ${(props) => props.theme.colors.thirdTextColor};
-  /* opacity: 0.5; */
 `;
 
-export const Profile = styled.div`
-  position: absolute;
-  right: 3rem;
+export const ProfileWrapper = styled.div`
   height: 2.5rem;
   width: 2.5rem;
   border-radius: 50%;
   background-color: ${(props) => props.theme.colors.thirdTextColor};
-  /* opacity: 0.4; */
+  opacity: 0.6;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
 
   @media (max-width: 576px) {
     right: 1rem;
@@ -122,14 +74,10 @@ export const Profile = styled.div`
 
 export const DropDown = styled.div`
   position: absolute;
-  top: 3rem;
+  top: 4rem;
   right: 0;
-  /* color: ${(props) => props.theme.colors.thirdTextColor}; */
-
   display: flex;
   background: ${(props) => props.theme.colors.backgroundColor};
-  /* background: white; */
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   z-index: 3;
 
@@ -175,7 +123,7 @@ export const DropDown = styled.div`
 //   }
 // `;
 
-export const DropDownIcon = styled(IoLogOutOutline)`
+export const DropDownItemIcon = styled(IoLogOutOutline)`
   padding-right: 1rem;
   width: 2.5rem;
   height: 2.5rem;
@@ -198,8 +146,8 @@ export const DropDownItem = styled.a`
   text-decoration: none;
   font-size: 1rem;
 
-  &:hover {
-    text-decoration: underline;
+  &:hover ${DropDownItemIcon} {
+    transform: scale(1.15);
   }
 
   @media (max-width: 576px) {
