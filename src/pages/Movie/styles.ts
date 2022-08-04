@@ -11,13 +11,15 @@ export const Container = styled.div`
 
 export const MainInfo = styled.div`
   flex: 1;
-  padding: 10px;
+  padding: 16px;
   border: 1px solid ${(props) => props.theme.colors.accentColor};
   margin-right: 1rem;
 
   & p {
-    padding-top: 0.5rem;
     color: ${(props) => props.theme.colors.secondTextColor};
+  }
+  & h1+p {
+    padding: 1rem 0;
   }
 
   @media (max-width: 1200px) {
