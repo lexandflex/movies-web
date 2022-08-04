@@ -20,7 +20,7 @@ export const SearchModal: FC<Props> = ({ onClose, handleSearch, children }) => {
         </Styled.IconWrapper>
         <Styled.Search>
           <AppText text="Поиск" size="xl" color="secondTextColor" tag="h1" />
-          <AppInput onChange={handleInputChange} />
+          <AppInput type='search' onChange={handleInputChange} fontSize={24} />
           <div>{children}</div>
         </Styled.Search>
       </Styled.Content>

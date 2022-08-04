@@ -42,6 +42,11 @@ export const CloseIcon = styled(GrClose)`
     transform: scale(1.1) rotate(10deg);
     color: ${(props) => props.theme.colors.textColor};
   }
+
+  @media (max-width: 768px) {
+    width: 25px;
+    height: 25px;
+  }
 `;
 
 export const InputWrapper = styled.div``;
