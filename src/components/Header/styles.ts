@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { TbSearch } from 'react-icons/tb';
 import { FaRegUser } from 'react-icons/fa';
 import { BiArrowBack } from 'react-icons/bi';
+import { IoLogOutOutline } from 'react-icons/io5';
 
 export const Container = styled.div`
   display: flex;
@@ -122,14 +123,86 @@ export const Profile = styled.div`
 export const DropDown = styled.div`
   position: absolute;
   top: 3rem;
-  color: ${(props) => props.theme.colors.thirdTextColor};
+  right: 0;
+  /* color: ${(props) => props.theme.colors.thirdTextColor}; */
+
+  display: flex;
+  background: ${(props) => props.theme.colors.backgroundColor};
+  /* background: white; */
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  z-index: 3;
+
+  li {
+    list-style-type: none;
+  }
+
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -18px;
+    right: 6%;
+    border: 10px solid;
+    border-color: transparent transparent ${(props) => props.theme.colors.backgroundColor}
+      transparent;
+  }
+
+  @media (max-width: 576px) {
+    position: fixed;
+    left: 0;
+    border-radius: 0;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 1rem;
+    box-shadow: none;
+    &::before {
+      border: none;
+    }
+  }
 `;
 
-export const DropDownItem = styled.div`
-  margin-top: 0.5rem;
-  text-align: center;
+// export const DropDownItem = styled.div`
+//   margin-top: 0.5rem;
+//   text-align: center;
+
+//   &:hover {
+//     opacity: 0.7;
+//   }
+// `;
+
+export const DropDownIcon = styled(IoLogOutOutline)`
+  padding-right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: ${(props) => props.theme.colors.secondTextColor};
+
+  @media (max-width: 576px) {
+    width: 3rem;
+    height: 3rem;
+  }
+`;
+
+export const DropDownItem = styled.a`
+  padding: 5px 40px 0px 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: ${(props) => props.theme.colors.secondTextColor};
+  border-bottom: none;
+  text-decoration: none;
+  font-size: 1rem;
 
   &:hover {
-    opacity: 0.7;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 1.25rem;
   }
 `;

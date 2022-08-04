@@ -7,12 +7,15 @@ import { Link } from 'react-router-dom';
 import useWindowDimensions from '../../utils/hooks/useWindowDimensions';
 import * as Styled from './styles';
 
-const BIG_SIZE_LOGO_URL = 'https://www.freepnglogos.com/uploads/netflix-logo-0.png';
-const SMALL_SIZE_LOGO_URL = 'https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const BIG_SIZE_LOGO_URL = require('@assets/header-text-logo.png');
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const SMALL_SIZE_LOGO_URL = require('@assets/header-circle-logo.png');
 
 const SEARCH_PLACEHOLDER = "I'm searching for...";
 
-const DROPDOWN_LINKS = [{ title: 'Logout', link: '' }];
+const DROPDOWN_LINKS = [{ title: 'Logout', link: '/logout', icon: <Styled.DropDownIcon /> }];
 
 const pageNumber = 1;
 
@@ -92,11 +95,16 @@ export const Header = () => {
             <Styled.UserIcon onClick={handleOpenCloseDropdown} />
             {showDropdown && (
               <Styled.DropDown>
-                {DROPDOWN_LINKS.map((dropdownLink) => (
-                  <Styled.DropDownItem key={dropdownLink.title} onClick={handleOpenCloseDropdown}>
-                    {dropdownLink.title}
-                  </Styled.DropDownItem>
-                ))}
+                <ul>
+                  {DROPDOWN_LINKS.map((dropdownLink) => (
+                    <li key={dropdownLink.link}>
+                      <Styled.DropDownItem href={dropdownLink.link}>
+                        {dropdownLink.icon}
+                        <p>{dropdownLink.title}</p>
+                      </Styled.DropDownItem>
+                    </li>
+                  ))}
+                </ul>
               </Styled.DropDown>
             )}
           </Styled.Profile>
