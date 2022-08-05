@@ -1,10 +1,10 @@
-import { AppText } from '@components/AppText';
-import { filmsSelector } from '@store/selectors';
-import { declOfNum } from '@utils/declOfNum';
 import React, { FC, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getInfoAboutFilmAction } from '../../store/actions/movies';
+import { filmsSelector } from '@store/selectors';
+import { getInfoAboutFilmAction } from '@store/actions/movies';
+import { AppText } from '@components/AppText';
+import { declOfNum } from '@utils/declOfNum';
 import * as Styled from './styles';
 
 export const Movie: FC = () => {
@@ -33,7 +33,11 @@ export const Movie: FC = () => {
   return (
     <Styled.Container>
       <Styled.MainInfo>
-        <AppText tag="h1" size="xl" text={currentFilm?.nameRu || ''} />
+        <AppText tag='h1' size='xl' text={currentFilm?.nameRu || ''} />
+        <AppText
+          size='sm'
+          text={`${currentFilm?.nameOriginal || ''} (${currentFilm?.countries[0].country})`}
+        />
         <AppText text={currentFilm?.description || ''} />
         <AppText text={`Год выпуска: ${currentFilm?.year || ''}`} />
         <AppText text={`Кинопоиск : ${currentFilm?.ratingKinopoisk || ''}`} />
@@ -51,7 +55,7 @@ export const Movie: FC = () => {
         />
       </Styled.MainInfo>
       <Styled.Player>
-        <div id="yohoho" data-kinopoisk={id} />
+        <div id='yohoho' data-kinopoisk={id} />
       </Styled.Player>
     </Styled.Container>
   );

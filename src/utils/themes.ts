@@ -6,6 +6,7 @@ export interface Theme {
     textColor: string;
     secondTextColor: string;
     thirdTextColor: string;
+    altTextColor: string;
     backgroundColor: string;
     secondBackgroundColor: string;
     ratingStarColor: string;
@@ -18,8 +19,9 @@ export const darkTheme: Theme = {
     error: '#DF3636',
     success: '#189D5D',
     textColor: '#FFFFFF',
-    secondTextColor: '#d4d5d9',
+    secondTextColor: '#c3c5ca',
     thirdTextColor: '#f2f2f2',
+    altTextColor: '#add8e6',
     backgroundColor: '#0e101c',
     secondBackgroundColor: '#030303',
     ratingStarColor: '#ffcd3c',
@@ -32,8 +34,9 @@ export const lightTheme: Theme = {
     error: '#DF3636',
     success: '#189D5D',
     textColor: '#FFFFFF',
-    secondTextColor: '#d4d5d9',
+    secondTextColor: '#c3c5ca',
     thirdTextColor: '#f2f2f2',
+    altTextColor: '#add8e6',
     backgroundColor: '#1e2a4a',
     secondBackgroundColor: '#030303',
     ratingStarColor: '#ffcd3c',

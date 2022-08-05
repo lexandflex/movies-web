@@ -26,7 +26,7 @@ export const SearchWrapper = styled.div`
 
   & h2 {
     letter-spacing: 0.6px;
-    margin-left: 0.4rem;
+    margin-left: 0.75rem;
     line-height: 24px;
   }
 

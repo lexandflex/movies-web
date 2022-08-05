@@ -25,9 +25,9 @@ export const Header = () => {
 
   const LogoImg = useMemo(() => {
     if (width > 576) {
-      return <img src={BIG_SIZE_LOGO_URL} alt="Netflix" height="35" width="112" />;
+      return <img src={BIG_SIZE_LOGO_URL} alt='Netflix' height='35' width='112' />;
     }
-    return <img src={SMALL_SIZE_LOGO_URL} alt="Netflix" height="45" width="60" />;
+    return <img src={SMALL_SIZE_LOGO_URL} alt='Netflix' height='45' width='60' />;
   }, [width]);
 
   const handleSearchClick = () => {
@@ -47,7 +47,7 @@ export const Header = () => {
   };
 
   const SearchComponent = (
-    <Styled.SearchWrapper onClick={handleSearchClick}>
+    <Styled.SearchWrapper onClick={handleSearchClick} title='Поиск'>
       <Styled.SearchIcon />
       {width > 576 && <AppText text='Поиск' tag='h2' size='sm' />}
     </Styled.SearchWrapper>
@@ -56,7 +56,7 @@ export const Header = () => {
   return (
     <>
       <Styled.Container>
-        <Link to="/">{LogoImg}</Link>
+        <Link to='/'>{LogoImg}</Link>
         {SearchComponent}
         <Styled.ProfileWrapper onClick={handleToggleDropdown}>
           <Styled.UserIcon />

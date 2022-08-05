@@ -12,14 +12,34 @@ export const Container = styled.div`
 export const MainInfo = styled.div`
   flex: 1;
   padding: 16px;
-  border: 1px solid ${(props) => props.theme.colors.accentColor};
+  border: 2px solid ${(props) => props.theme.colors.accentColor};
   margin-right: 1rem;
 
   & p {
     color: ${(props) => props.theme.colors.secondTextColor};
   }
+
   & h1+p {
-    padding: 1rem 0;
+    color: ${(props) => props.theme.colors.altTextColor};
+  }
+
+  & p:nth-child(3) {
+    padding: 2rem 0;
+    position: relative;
+    :after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transform: translateX(50%);
+      height: 1px;
+      width: 50%;
+      background-color: ${(props) => props.theme.colors.accentColor};
+    }
+  }
+
+  & p:nth-child(4) {
+    margin-top: 1rem;
   }
 
   @media (max-width: 1200px) {
