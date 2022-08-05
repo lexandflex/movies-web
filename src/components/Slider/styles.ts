@@ -87,7 +87,7 @@ export const SliderCardInfo = styled.div`
     white-space: normal;
     line-height: 1.2;
     margin-bottom: 1rem;
-    font-size: clamp(18px, 2vw, 42px);
+    font-size: clamp(10px, 2vw, 42px);
   }
 
   & p {

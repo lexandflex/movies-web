@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { TbSearch } from 'react-icons/tb';
 import { FaRegUser } from 'react-icons/fa';
-import { BiArrowBack } from 'react-icons/bi';
 import { IoLogOutOutline } from 'react-icons/io5';
 
 export const Container = styled.div`
@@ -45,10 +44,6 @@ export const UserIcon = styled(FaRegUser)`
   width: 65%;
   height: 65%;
   color: ${(props) => props.theme.colors.secondBackgroundColor};
-`;
-
-export const GoBackIcon = styled(BiArrowBack)`
-  color: ${(props) => props.theme.colors.thirdTextColor};
 `;
 
 export const ProfileWrapper = styled.div`
@@ -113,15 +108,6 @@ export const DropDown = styled.div`
     }
   }
 `;
-
-// export const DropDownItem = styled.div`
-//   margin-top: 0.5rem;
-//   text-align: center;
-
-//   &:hover {
-//     opacity: 0.7;
-//   }
-// `;
 
 export const DropDownItemIcon = styled(IoLogOutOutline)`
   padding-right: 1rem;
