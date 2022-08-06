@@ -2,13 +2,13 @@ import { RouteNames } from '@router/routeNames';
 import { Navigator } from '@services/navigatorService';
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal } from '../../components/Modal';
+import { Link } from 'react-router-dom';
+import { RatingModal } from '../../components/RatingModal';
 import { Slider } from '../../components/Slider';
+import { MovieCollections } from '../../constants/movieCollections';
 import { getTopAction } from '../../store/actions/movies';
 import { State } from '../../store/reducers';
 import * as Styled from './styles';
-
-const RATING_ITEMS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export const Main: FC = () => {
   const dispatch = useDispatch();
@@ -26,8 +26,8 @@ export const Main: FC = () => {
         image: film.posterUrlPreview || '',
         name: film.nameRu || '',
         year: film.year || '',
-        genres: film.genres.map(genre => genre.genre).join(', ') || '',
-        countries: film.countries.map(country => country.country).join(', ') || '',
+        genres: film.genres.map((genre) => genre.genre).join(', ') || '',
+        countries: film.countries.map((country) => country.country).join(', ') || '',
       })),
     [movies],
   );
@@ -43,15 +43,13 @@ export const Main: FC = () => {
   };
 
   return (
-    <>
-      <Slider slides={slides} onClick={handleSlideClick} handleShowModal={handleShowModal} />
-      <Modal showModal={showModal} onClose={setShowModal} title="Rating" text="Rate the movie">
-        <Styled.RatingBlock>
-          {RATING_ITEMS.map((ratingItem) => (
-            <Styled.RatingItem key={ratingItem}>{ratingItem}</Styled.RatingItem>
-          ))}
-        </Styled.RatingBlock>
-      </Modal>
-    </>
+    <Styled.Container>
+      <Styled.MovieCategoryContainer>
+        <Link to={`${RouteNames.COLLECTIONS}/${MovieCollections.Top}`}>Лучшее</Link>
+
+        <Slider slides={slides} onClick={handleSlideClick} handleShowModal={handleShowModal} />
+      </Styled.MovieCategoryContainer>
+      <RatingModal showModal={showModal} onClose={handleShowModal} />
+    </Styled.Container>
   );
 };

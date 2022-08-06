@@ -1,5 +1,11 @@
 import styled, { css } from 'styled-components';
 import { MdChevronLeft, MdChevronRight, MdStarOutline } from 'react-icons/md';
+import {
+  MovieCardCss,
+  MovieCardImageCss,
+  MovieCardInfoCss,
+  MovieIconStarCss,
+} from '../../styles/movieCard';
 
 export const Container = styled.div`
   width: 100%;
@@ -74,78 +80,22 @@ export const SliderIconRight = styled(MdChevronRight)`
 `;
 
 export const SliderCardInfo = styled.div`
-  position: absolute;
-  width: 80%;
-  bottom: 8%;
-  left: 10%;
-	z-index: 3;
-	opacity: 0;
-	transform: translateY(25px);
-	transition: 0.5s;
-
-  & h1 {
-    white-space: normal;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    font-size: clamp(10px, 2vw, 42px);
-  }
-
-  & p {
-    color: ${(props) => props.theme.colors.secondTextColor};
-    margin-top: 0.2rem;
-    white-space: normal;
-    font-size: clamp(12px, 0.9vw, 18px);
-  }
-
-  & button {
-    margin-top: 10%;
-    p {
-      color: initial;
-    }
-  }
+  ${MovieCardInfoCss}
 `;
 
 export const SliderIconStar = styled(MdStarOutline)`
-  cursor: pointer;
-  position: absolute;
-  right: 7%;
-  top: 3%;
-  opacity: 0;
-  font-size: 2rem;
-  z-index: 3;
-  transform: translateX(50%);
-  transition: 0.5s;
-
-  &:hover {
-    fill: ${(props) => props.theme.colors.ratingStarColor};
-  }
-
-  @media (max-width: 992px) {
-    font-size: 1rem;
-  }
+  ${MovieIconStarCss}
 `;
 
 export const SliderCard = styled.div`
+  ${MovieCardCss}
+
   width: 19%;
   height: 100%;
   border-radius: 10px;
-  position: relative;
   display: inline-block;
   padding-right: 0.5%;
   padding-left: 0.5%;
-  transition: 0.4s ease-out;
-
-  &:before {
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    display: block;
-    border-radius: 10px;
-    background-color: black;
-    opacity: 0;
-    transition: 0.5s;
-  }
 
   &:hover {
     transform: translateY(-2%);
@@ -175,8 +125,5 @@ export const SliderCard = styled.div`
 `;
 
 export const SliderCardImage = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  object-fit: cover;
+  ${MovieCardImageCss}
 `;
