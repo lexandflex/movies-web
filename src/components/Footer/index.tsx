@@ -1,18 +1,10 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import useWindowDimensions from '@utils/hooks/useWindowDimensions';
-import { GrFacebook, GrInstagram, GrTwitter, GrYoutube } from 'react-icons/gr';
-import { FaTelegramPlane } from 'react-icons/fa';
 import { AppLogo } from '@components/AppLogo';
 import { AppText } from '@components/AppText';
+import { SOCIALS, CONTACTS, NAV, ABOUT } from './data';
 import * as Styled from './styles';
-
-const SOCIALS = [
-  { id: 1, title: 'Facebook', link: 'https://ru-ru.facebook.com/ivi.ru/', icon: <GrFacebook /> },
-  { id: 2, title: 'Telegram', link: 'https://t.me/official_iviru', icon: <FaTelegramPlane /> },
-  { id: 3, title: 'Instagram', link: 'https://www.instagram.com/kinopoisk/?hl=ru', icon: <GrInstagram /> },
-  { id: 4, title: 'Twitter', link: 'https://twitter.com/kinopoiskru', icon: <GrTwitter /> },
-  { id: 5, title: 'YouTube', link: 'https://www.youtube.com/c/kinopoisk/videos', icon: <GrYoutube /> },
-];
 
 export const Footer: FC = () => {
 
@@ -23,13 +15,29 @@ export const Footer: FC = () => {
       <Styled.FooterMain>
         <Styled.FooterMainBox>
           <AppLogo windowWidth={width} />
-          <Styled.FooterContacts>адрес, телефон, имейл</Styled.FooterContacts>
+          <Styled.FooterContacts>
+            {Object.values(CONTACTS).map((item, i) => <AppText key={+i} text={item} />)}
+          </Styled.FooterContacts>
         </Styled.FooterMainBox>
         <Styled.FooterMainBox>
-          <Styled.FooterNavigation>навигация, домой, сервисы, блог, страницы, соцсети, профиль</Styled.FooterNavigation>
+          <Styled.FooterNavigation>
+            <AppText text='Навигация' tag='h2' />
+            {NAV.map(link => (
+              <li key={link.id}>
+                <Link to={link.route}>{link.title}</Link>
+              </li>
+            ))}
+          </Styled.FooterNavigation>
         </Styled.FooterMainBox>
         <Styled.FooterMainBox>
-          <Styled.FooterAbout>о нас, компания, наша миссия, вакансии, поддержка, контакты</Styled.FooterAbout>
+          <Styled.FooterNavigation>
+            <AppText text='О нас' tag='h2' />
+            {ABOUT.map(link => (
+              <li key={link.id}>
+                <Link to={link.route}>{link.title}</Link>
+              </li>
+            ))}
+          </Styled.FooterNavigation>
         </Styled.FooterMainBox>
       </Styled.FooterMain>
 
