@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { FC, useRef } from 'react';
 import * as Styled from './styles';
+import { Props } from './types';
 
-export const Modal = ({ showModal, onClose, title = '', text = '', children }: any) => {
+export const Modal: FC<Props> = ({ showModal, onClose, title = '', text = '', children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleClickCloseModalButton = () => {
