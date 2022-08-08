@@ -20,7 +20,11 @@ export const MovieCardInfo = styled.div`
   ${MovieCardInfoCss}
 
   & h1 {
-    font-size: clamp(18px, 2vw, 25px);
+    font-size: clamp(13px, 2vw, 23px);
+  }
+
+  & p {
+    font-size: clamp(9px, 0.9vw, 18px);
   }
 `;
 
@@ -34,8 +38,8 @@ export const MovieContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1%;
-  max-width: 200px;
-  width: 100%;
+  max-width: 300px;
+  width: auto;
   cursor: pointer;
 
   &:hover {
@@ -58,14 +62,17 @@ export const MovieContainer = styled.div`
 
   @media (min-width: 768px) and (max-width: 992px) {
     width: 23%;
+    max-width: 200px;
   }
 
   @media (min-width: 576px) and (max-width: 768px) {
     width: 30%;
+    max-width: 200px;
   }
 
   @media (max-width: 576px) {
     width: 44%;
+    max-width: 200px;
   }
 `;
 

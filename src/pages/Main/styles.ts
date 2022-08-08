@@ -10,12 +10,13 @@ export const MovieCategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 3rem;
 
   & a {
     width: max-content;
     padding-left: 5%;
     padding-bottom: 1%;
-    font-size: 2em;
+    font-size: clamp(18px, 2vw, 42px);
     font-style: normal;
     font-weight: 700;
     text-decoration: none;

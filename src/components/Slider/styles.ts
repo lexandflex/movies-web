@@ -10,12 +10,10 @@ import {
 export const Container = styled.div`
   width: 100%;
   height: 60%;
-  max-height: 340px;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
 `;
 
 export const SliderContainer = styled.div`

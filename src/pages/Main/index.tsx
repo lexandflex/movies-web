@@ -49,6 +49,7 @@ export const Main: FC = () => {
 
         <Slider slides={slides} onClick={handleSlideClick} handleShowModal={handleShowModal} />
       </Styled.MovieCategoryContainer>
+
       <RatingModal showModal={showModal} onClose={handleShowModal} />
     </Styled.Container>
   );
