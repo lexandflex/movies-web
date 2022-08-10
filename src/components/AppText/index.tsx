@@ -1,7 +1,7 @@
-import { TEXT_SIZES } from '@constants/textSizes';
 import React, { FC, memo } from 'react';
-import * as Styled from './styles';
+import { TEXT_SIZES } from '@constants/textSizes';
 import { Props } from './types';
+import * as Styled from './styles';
 
 export const AppText: FC<Props> = memo(
   ({ size = 'sm', tag = 'p', text = '', color = 'textColor', style }) => (

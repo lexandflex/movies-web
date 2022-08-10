@@ -19,6 +19,22 @@ export interface TopFilmsResponse {
   ];
 }
 
+export interface FilmFromSearchResponse {
+  filmId: number;
+  nameRu: string | '';
+  nameEn: string | '';
+  type: string | '';
+  year: string | '';
+  description: string | '';
+  filmLength: string | '';
+  countries: [{ country: string | null }];
+  genres: [{ genre: string | null }];
+  posterUrl: string | null;
+  posterUrlPreview: string | null;
+  rating: string | null;
+  ratingVoteCount: number | null;
+};
+
 export interface Genre {
   id: number;
   genre: string;
@@ -60,21 +76,7 @@ export interface FilmsByTitleParams {
 export interface FilmsByTitleResponse {
   keyword: string;
   pagesCount: number;
-  films: {
-    filmId: number;
-    nameRu: string | null;
-    nameEn: string | null;
-    type: string | null;
-    year: string | null;
-    description: string | null;
-    filmLength: string | null;
-    countries: [{ country: string | null }];
-    genres: [{ genre: string | null }];
-    posterUrl: string | null;
-    posterUrlPreview: string | null;
-    rating: string | null;
-    ratingVoteCount: number | null;
-  }[];
+  films: Array<FilmFromSearchResponse>;
 }
 
 export interface FilmByIdParams {

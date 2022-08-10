@@ -1,13 +1,13 @@
-import { RouteNames } from '@router/routeNames';
-import { Navigator } from '@services/navigatorService';
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { RatingModal } from '../../components/RatingModal';
-import { Slider } from '../../components/Slider';
-import { MovieCollections } from '../../constants/movieCollections';
-import { getTopAction } from '../../store/actions/movies';
-import { State } from '../../store/reducers';
+import { RouteNames } from '@router/routeNames';
+import { Navigator } from '@services/navigatorService';
+import { RatingModal } from '@components/RatingModal';
+import { Slider } from '@components/Slider';
+import { MovieCollections } from '@constants/movieCollections';
+import { getTopAction } from '@store/actions/movies';
+import { State } from '@store/reducers';
 import * as Styled from './styles';
 
 export const Main: FC = () => {

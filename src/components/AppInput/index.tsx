@@ -1,6 +1,6 @@
+import React, { forwardRef, InputHTMLAttributes, ReactNode } from 'react';
 import { TEXT_SIZES } from '@constants/textSizes';
 import { Size } from '@models/common';
-import React, { FC, forwardRef, InputHTMLAttributes, ReactNode } from 'react';
 import * as Styled from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {

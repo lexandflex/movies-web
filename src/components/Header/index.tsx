@@ -67,7 +67,9 @@ export const Header = () => {
           )}
         </Styled.ProfileWrapper>
       </Styled.Container>
-      {showSearchModal && <SearchModal onClose={handleCancelSearch} handleSearch={onSearch} />}
+      {showSearchModal && (
+        <SearchModal onClose={handleCancelSearch} handleSearch={onSearch} data={foundFilms} />
+      )}
     </>
   );
 };

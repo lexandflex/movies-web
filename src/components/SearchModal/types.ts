@@ -1,7 +1,7 @@
-import { ReactElement } from 'react';
+import { FilmFromSearchResponse } from '@models/movies';
 
 export interface Props {
   onClose: () => void;
   handleSearch: (value: string) => void;
-  children?: ReactElement;
+  data: Array<FilmFromSearchResponse> | [];
 }

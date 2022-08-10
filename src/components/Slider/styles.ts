@@ -98,7 +98,7 @@ export const SliderCard = styled.div`
   &:hover {
     transform: translateY(-2%);
     &:before {
-      opacity: 0.6;
+      opacity: 0.8;
     }
     ${SliderCardInfo}, ${SliderIconStar} {
       opacity: 1;
