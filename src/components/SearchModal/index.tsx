@@ -46,7 +46,7 @@ export const SearchModal: FC<Props> = ({ onClose, handleSearch, data }) => {
                       {
                         inputRef.current ? (
                           <p>
-                            { highlightMatch(inputRef.current?.value, nameRu) }
+                            { highlightMatch(inputRef.current?.value, nameRu || nameEn) }
                           </p>
                         ) : <AppText text={nameRu} />
                       }
