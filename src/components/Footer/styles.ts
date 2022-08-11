@@ -28,6 +28,7 @@ export const FooterWrapper = styled.footer`
 
 export const FooterMain = styled.div`
   ${FlexRowSpaceBetween}
+  justify-content: space-around;
 `;
 
 export const FooterDown = styled.div`
