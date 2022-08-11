@@ -30,7 +30,7 @@ export interface MoviesState {
   films: { [id: string]: FilmByIdResponse };
   searchedFilms: FilmsByTitleResponse;
   genres: Genre[];
-  moviesByGenre: MoviesByGenre;
+  moviesByGenre: { [genreId: string]: MoviesByGenre };
 }
 
 const initialState: MoviesState = {
@@ -78,27 +78,7 @@ const initialState: MoviesState = {
     appraisers: [{ userId: null, rating: 0 }],
   },
   genres: [],
-  moviesByGenre: {
-    total: 0,
-    totalPages: 0,
-    items: [
-      {
-        kinopoiskId: 0,
-        imdbId: 0,
-        nameRu: null,
-        nameEn: null,
-        nameOriginal: null,
-        countries: [{ country: null }],
-        genres: [{ genre: null }],
-        ratingKinopoisk: 0,
-        ratingImdb: 0,
-        year: 0,
-        type: null,
-        posterUrl: null,
-        posterUrlPreview: null,
-      },
-    ],
-  },
+  moviesByGenre: {},
 };
 
 export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initialState)
@@ -137,7 +117,7 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
   .handleAction(getByGenreAction.success, (state, action) => ({
     ...state,
     loading: false,
-    moviesByGenre: action.payload,
+    moviesByGenre: { ...state.moviesByGenre, [action.payload.genreId]: action.payload },
   }))
   .handleAction(getByGenreAction.failure, (state, action) => ({
     ...state,

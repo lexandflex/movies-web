@@ -6,22 +6,43 @@ import { Navigator } from '@services/navigatorService';
 import { RatingModal } from '@components/RatingModal';
 import { Slider } from '@components/Slider';
 import { MovieCollections } from '@constants/movieCollections';
-import { getTopAction } from '@store/actions/movies';
+import { getByGenreAction, getGenresAction, getTopAction } from '@store/actions/movies';
 import { State } from '@store/reducers';
+import { Genre, MoviesByGenre } from '../../models/movies';
 import * as Styled from './styles';
+
+const COLLECTIONS = [
+  MovieCollections.Thriller,
+  MovieCollections.Drama,
+  MovieCollections.Crime,
+  MovieCollections.Action_Movie,
+  MovieCollections.Comedy,
+  MovieCollections.Military,
+  MovieCollections.Horrors,
+  MovieCollections.Cartoon,
+];
 
 export const Main: FC = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  const movies = useSelector((state: State) => state.movies.topFilms);
+
+  const { topFilms, moviesByGenre, genres } = useSelector((state: State) => state.movies);
+
+  const [genreWithId, setGenreWithId] = useState<Genre[]>([]);
 
   const handleSlideClick = (id: string) => {
     Navigator.push(`${RouteNames.MOVIES}/${id}`);
   };
 
-  const slides = useMemo(
+  useEffect(() => {
+    genreWithId.forEach(({ id }) => {
+      dispatch(getByGenreAction.request({ genreId: `${id}`, page }));
+    });
+  }, [genreWithId]);
+
+  const topFilmsSlides = useMemo(
     () =>
-      movies.films.map((film) => ({
+      topFilms.films.map((film) => ({
         id: `${film.filmId}`,
         image: film.posterUrlPreview || '',
         name: film.nameRu || '',
@@ -29,8 +50,55 @@ export const Main: FC = () => {
         genres: film.genres.map((genre) => genre.genre).join(', ') || '',
         countries: film.countries.map((country) => country.country).join(', ') || '',
       })),
-    [movies],
+    [topFilms],
   );
+
+  const filmsByGenreSlides = useMemo(() => {
+    const arr = Object.entries(moviesByGenre);
+    return arr.reduce<{
+      [key: string]: {
+        id: string;
+        image: string;
+        name: string;
+        year: string;
+        genres: string;
+        countries: string;
+      }[];
+    }>((prev, current) => {
+      const key = current[0];
+
+      const slides = current[1].items.map((film) => ({
+        id: `${film.kinopoiskId}`,
+        image: film.posterUrlPreview || '',
+        name: film.nameRu || '',
+        year: `${film.year}` || '',
+        genres: film.genres.map((genre) => genre.genre).join(', ') || '',
+        countries: film.countries.map((country) => country.country).join(', ') || '',
+      }));
+
+      return { ...prev, [key]: slides };
+    }, {});
+  }, [moviesByGenre]);
+
+  console.log(filmsByGenreSlides);
+
+  useEffect(() => {
+    dispatch(getGenresAction.request());
+  }, []);
+
+  useEffect(() => {
+    const collections = COLLECTIONS.reduce<Genre[]>((prev, current) => {
+      const genre = genres.find((genre) => genre.genre === current);
+      if (genre) {
+        prev.push(genre);
+      }
+      return prev;
+    }, []);
+
+    if (collections) {
+      setGenreWithId(collections);
+    }
+  }, [genres]);
 
   useEffect(() => {
     dispatch(getTopAction.request({ page }));
@@ -47,8 +115,30 @@ export const Main: FC = () => {
       <Styled.MovieCategoryContainer>
         <Link to={`${RouteNames.COLLECTIONS}/${MovieCollections.Top}`}>Лучшее</Link>
 
-        <Slider slides={slides} onClick={handleSlideClick} handleShowModal={handleShowModal} />
+        <Slider
+          slides={topFilmsSlides}
+          onClick={handleSlideClick}
+          handleShowModal={handleShowModal}
+        />
       </Styled.MovieCategoryContainer>
+
+      {genreWithId.map(({ id, genre }) => {
+        if (id in filmsByGenreSlides) {
+          return (
+            <Styled.MovieCategoryContainer key={id}>
+              <Link to={`${RouteNames.COLLECTIONS}/${genre}`}>{genre}</Link>
+
+              <Slider
+                slides={filmsByGenreSlides[id]}
+                onClick={handleSlideClick}
+                handleShowModal={handleShowModal}
+              />
+            </Styled.MovieCategoryContainer>
+          );
+        }
+
+        return null;
+      })}
 
       <RatingModal showModal={showModal} onClose={handleShowModal} />
     </Styled.Container>

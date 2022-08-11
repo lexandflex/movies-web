@@ -9,7 +9,8 @@ import {
 
 export const Container = styled.div`
   width: 100%;
-  height: 60%;
+  height: 45vh;
+  /* height: 60%; */
   position: relative;
   display: flex;
   justify-content: center;
@@ -30,6 +31,7 @@ export const Slider = styled.div`
   height: 100%;
   white-space: nowrap;
   overflow-x: hidden;
+  overflow: hidden;
   scrollbar-width: none;
   scroll-behavior: smooth;
 

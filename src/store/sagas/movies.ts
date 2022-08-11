@@ -1,4 +1,4 @@
-import { call, Effect, put, SagaReturnType, takeLatest } from 'redux-saga/effects';
+import { call, Effect, put, SagaReturnType, takeEvery, takeLatest } from 'redux-saga/effects';
 import { ActionType } from 'typesafe-actions';
 import { MoviesService } from '../../services/moviesService';
 import {
@@ -42,6 +42,7 @@ export class MoviesSagaWorker {
       const response: SagaReturnType<typeof MoviesService.getMoviesByGenre> = yield call(
         MoviesService.getMoviesByGenre,
         payload.genreId,
+        payload.page,
       );
       yield put(getByGenreAction.success(response.data));
     } catch (error: any) {
@@ -130,4 +131,10 @@ export function* moviesSaga(): Generator<Effect, void> {
   yield takeLatest(getTopAction.request, MoviesSagaWorker.getTop);
   yield takeLatest(getByTitleAction.request, MoviesSagaWorker.getByTitle);
   yield takeLatest(getInfoAboutFilmAction.request, MoviesSagaWorker.getInfoAboutFilm);
+  yield takeLatest(getGenresAction.request, MoviesSagaWorker.getGenres);
+  yield takeEvery(getByGenreAction.request, MoviesSagaWorker.getByGenre);
+  yield takeLatest(getInfoAboutSeasonsAction.request, MoviesSagaWorker.getInfoAboutSeasons);
+  yield takeLatest(addRatingAction.request, MoviesSagaWorker.addRating);
+  yield takeLatest(getRatingAction.request, MoviesSagaWorker.getRating);
+  yield takeLatest(removeRatingAction.request, MoviesSagaWorker.removeRating);
 }

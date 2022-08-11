@@ -13,8 +13,8 @@ export class MoviesService {
     return ApiService.api.get('/movies/genres');
   }
 
-  static async getMoviesByGenre(genreId: string) {
-    return ApiService.api.get(`/movies/search-by-genre?genreId=${genreId}`);
+  static async getMoviesByGenre(genreId: string, page: number) {
+    return ApiService.api.get(`/movies/search-by-genre?genreId=${genreId}&page=${page}`);
   }
 
   static async getInformationAboutTheFilmById(id: string) {

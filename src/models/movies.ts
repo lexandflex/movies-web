@@ -33,7 +33,7 @@ export interface FilmFromSearchResponse {
   posterUrlPreview: string | null;
   rating: string | null;
   ratingVoteCount: number | null;
-};
+}
 
 export interface Genre {
   id: number;
@@ -46,9 +46,11 @@ export interface Genres {
 
 export interface GetByGenreParams {
   genreId: string;
+  page: number;
 }
 
 export interface MoviesByGenre {
+  genreId: string;
   total: number;
   totalPages: number;
   items: {

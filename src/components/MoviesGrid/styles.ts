@@ -40,6 +40,7 @@ export const MovieContainer = styled.div`
   margin: 1%;
   max-width: 300px;
   width: auto;
+  height: 45vh;
   cursor: pointer;
 
   &:hover {
