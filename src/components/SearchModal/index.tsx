@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, useDeferredValue } from 'react';
 import { Link } from 'react-router-dom';
 import { RouteNames } from '@router/routeNames';
 import { AppInput } from '@components/AppInput';
@@ -10,6 +10,7 @@ import * as Styled from './styles';
 export const SearchModal: FC<Props> = ({ onClose, handleSearch, data }) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const movies = useDeferredValue(data);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -35,7 +36,7 @@ export const SearchModal: FC<Props> = ({ onClose, handleSearch, data }) => {
         <Styled.SearchHintBlock>
           <Styled.SearchHintContainer>
             <Styled.SearchResultList>
-              {data.length && data.map(({ filmId, nameEn, nameRu, year }) => (
+              {movies.length && movies.map(({ filmId, nameEn, nameRu, year }) => (
                 <Styled.SearchResultItem key={filmId}>
                   <Link to={`${RouteNames.MOVIES}/${filmId}`} onClick={onClose}>
                     <Styled.SearchItemIconWrapper>
