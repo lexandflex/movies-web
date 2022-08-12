@@ -9,6 +9,7 @@ import { RouteNames } from '../../router/routeNames';
 import { getByGenreAction, getGenresAction, getTopAction } from '../../store/actions/movies';
 import { State } from '../../store/reducers';
 import * as Styled from './styles';
+import { Movies } from './types';
 
 export const Collection: FC = () => {
   const dispatch = useDispatch();
@@ -17,16 +18,7 @@ export const Collection: FC = () => {
 
   const [page, setPage] = useState(1);
 
-  const [films, setFilms] = useState<
-    {
-      id: string;
-      image: string;
-      name: string;
-      year: string;
-      genres: string;
-      countries: string;
-    }[]
-  >([]);
+  const [films, setFilms] = useState<Movies>({});
 
   const [genreId, setGenreId] = useState('');
 
@@ -57,34 +49,46 @@ export const Collection: FC = () => {
 
   useMemo(() => {
     if (name === MovieCollections.Top) {
-      const nextPage = topFilms.films.map((film) => ({
-        id: `${film.filmId}`,
-        image: film.posterUrlPreview || '',
-        name: film.nameRu || '',
-        year: film.year || '',
-        genres: film.genres.map((genre) => genre.genre).join(', ') || '',
-        countries: film.countries.map((country) => country.country).join(', ') || '',
-      }));
+      const nextPage = topFilms.films.reduce<Movies>(
+        (prev, current) => ({
+          ...prev,
+          [`${current.filmId}`]: {
+            id: `${current.filmId}`,
+            image: current.posterUrlPreview || '',
+            name: current.nameRu || '',
+            year: current.year || '',
+            genres: current.genres.map((genre) => genre.genre).join(', ') || '',
+            countries: current.countries.map((country) => country.country).join(', ') || '',
+          },
+        }),
+        {},
+      );
 
       if (!topFilms.films.some((film) => film.filmId === 0)) {
-        setFilms((prevState) => [...prevState, ...nextPage]);
+        setFilms((prevState) => ({ ...prevState, ...nextPage }));
       }
     }
   }, [topFilms, name]);
 
   useMemo(() => {
     if (name !== MovieCollections.Top) {
-      const nextPage = moviesByGenre[genreId]?.items.map((film) => ({
-        id: `${film.kinopoiskId}`,
-        image: film.posterUrlPreview || '',
-        name: film.nameRu || '',
-        year: `${film.year}` || '',
-        genres: film.genres.map((genre) => genre.genre).join(', ') || '',
-        countries: film.countries.map((country) => country.country).join(', ') || '',
-      }));
+      const nextPage = moviesByGenre[genreId]?.items.reduce<Movies>(
+        (prev, current) => ({
+          ...prev,
+          [`${current.kinopoiskId}`]: {
+            id: `${current.kinopoiskId}`,
+            image: current.posterUrlPreview || '',
+            name: current.nameRu || '',
+            year: `${current.year}` || '',
+            genres: current.genres.map((genre) => genre.genre).join(', ') || '',
+            countries: current.countries.map((country) => country.country).join(', ') || '',
+          },
+        }),
+        {},
+      );
 
       if (!moviesByGenre[genreId]?.items.some((film) => film.kinopoiskId === 0) && nextPage) {
-        setFilms((prevState) => [...prevState, ...nextPage]);
+        setFilms((prevState) => ({ ...prevState, ...nextPage }));
       }
     }
   }, [moviesByGenre, name, genreId]);
@@ -102,7 +106,11 @@ export const Collection: FC = () => {
   return (
     <>
       <Styled.Container>
-        <MoviesGrid movies={films} onClick={handleMovieClick} handleShowModal={handleShowModal} />
+        <MoviesGrid
+          movies={Object.values(films)}
+          onClick={handleMovieClick}
+          handleShowModal={handleShowModal}
+        />
         <Styled.ShowMoreIcon onClick={handleClickShowMore} />
       </Styled.Container>
 
