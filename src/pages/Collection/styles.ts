@@ -14,7 +14,14 @@ export const Container = styled.div`
 `;
 
 export const ShowMoreIcon = styled(MdExpandMore)`
-  font-size: 3rem;
+  /* font-size: 3rem; */
   position: absolute;
   bottom: 0;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  font-size: ${({ isActive }: { isActive: boolean }) => (isActive ? '3rem' : 0)};
 `;

@@ -22,6 +22,8 @@ export const Collection: FC = () => {
 
   const [genreId, setGenreId] = useState('');
 
+  const [numberOfPages, setNumberOfPages] = useState(0);
+
   const handleMovieClick = (id: string) => {
     Navigator.push(`/${RouteNames.MOVIES}/${id}`);
   };
@@ -29,21 +31,33 @@ export const Collection: FC = () => {
   const { topFilms, moviesByGenre, genres } = useSelector((state: State) => state.movies);
 
   useEffect(() => {
-    dispatch(getGenresAction.request());
+    if (name !== MovieCollections.Top) {
+      dispatch(getGenresAction.request());
+    }
   }, []);
 
   useEffect(() => {
     if (name === MovieCollections.Top) {
-      dispatch(getTopAction.request({ page }));
+      setNumberOfPages(topFilms.pagesCount);
     } else {
-      const genreId = genres.find((genre) => genre.genre === name)?.id.toString() || '';
-      setGenreId(genreId);
-      dispatch(
-        getByGenreAction.request({
-          genreId,
-          page,
-        }),
-      );
+      setNumberOfPages(moviesByGenre[genreId]?.totalPages || 0);
+    }
+  }, [topFilms, moviesByGenre, genreId]);
+
+  useEffect(() => {
+    if (page <= numberOfPages) {
+      if (name === MovieCollections.Top) {
+        dispatch(getTopAction.request({ page }));
+      } else {
+        const genreId = genres.find((genre) => genre.genre === name)?.id.toString() || '';
+        setGenreId(genreId);
+        dispatch(
+          getByGenreAction.request({
+            genreId,
+            page,
+          }),
+        );
+      }
     }
   }, [dispatch, page, genres, name]);
 
@@ -111,7 +125,7 @@ export const Collection: FC = () => {
           onClick={handleMovieClick}
           handleShowModal={handleShowModal}
         />
-        <Styled.ShowMoreIcon onClick={handleClickShowMore} />
+        <Styled.ShowMoreIcon onClick={handleClickShowMore} isActive={page < numberOfPages} />
       </Styled.Container>
 
       <RatingModal showModal={showModal} onClose={handleShowModal} />
