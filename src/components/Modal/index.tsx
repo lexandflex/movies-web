@@ -31,6 +31,7 @@ export const Modal: FC<Props> = ({ showModal, onClose, title = '', text = '', ch
             <Styled.CloseModalButton
               aria-label="Close modal"
               onClick={handleClickCloseModalButton}
+              title='Закрыть'
             />
           </Styled.ModalWrapper>
         </Styled.Container>

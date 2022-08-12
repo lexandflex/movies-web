@@ -11,7 +11,8 @@
       "@constants/*": ["./constants/*"],
       "@router/*": ["./router/*"],
       "@models/*": ["./models/*"],
-      "@configs/*": ["./configs/*"]
+      "@configs/*": ["./configs/*"],
+      "@styles/*": ["./styles/*"]
     }
   },
   "exclude": ["node_modules"]

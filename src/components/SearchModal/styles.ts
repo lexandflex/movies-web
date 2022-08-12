@@ -3,7 +3,7 @@ import { MdLocalMovies } from 'react-icons/md';
 import { GrClose } from 'react-icons/gr';
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   top: 0;

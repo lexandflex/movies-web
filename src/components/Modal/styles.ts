@@ -3,7 +3,7 @@ import { MdClose } from 'react-icons/md';
 
 export const Container = styled.div`
   background: rgba(0, 0, 0, 0.8);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -28,6 +28,11 @@ export const ModalWrapper = styled.div`
   position: relative;
   z-index: 101;
   border-radius: 10px;
+
+  @media (max-width: 992px) {
+    max-width: 500px;
+    max-height: 300px;
+  }
 `;
 
 export const ModalContent = styled.div`
@@ -60,4 +65,10 @@ export const CloseModalButton = styled(MdClose)`
   height: 32px;
   padding: 0;
   z-index: 10;
+  transition: all 0.2s;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.accentColor};
+    transform: rotate(15deg);
+  }
 `;

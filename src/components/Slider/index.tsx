@@ -1,8 +1,6 @@
 import React, { FC, useRef } from 'react';
 import { AppButton } from '@components/AppButton';
 import { AppText } from '@components/AppText';
-import { RouteNames } from '@router/routeNames';
-import { Navigator } from '@services/navigatorService';
 import * as Styles from './styles';
 import { Props } from './types';
 
@@ -34,7 +32,7 @@ export const Slider: FC<Props> = ({ slides, onClick, handleShowModal }) => {
           {slides.map((slide) => (
             <Styles.SliderCard key={slide.id}>
               <Styles.SliderCardImage src={slide.image} alt="logo" />
-              <Styles.SliderIconStar title="Оценить" onClick={handleShowModal} />
+              <Styles.SliderRatingStar title="Оценить" onClick={handleShowModal} />
               <Styles.SliderCardInfo>
                 <AppText text={slide.name} tag="h1" />
                 <AppText text={slide.countries} />

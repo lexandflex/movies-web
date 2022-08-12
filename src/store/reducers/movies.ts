@@ -96,6 +96,7 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
     loading: false,
     error: action.payload.error,
   }))
+
   .handleAction(getGenresAction.request, (state) => ({
     ...state,
     loading: true,
@@ -110,6 +111,7 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
     loading: false,
     error: action.payload.error,
   }))
+
   .handleAction(getByGenreAction.request, (state) => ({
     ...state,
     loading: true,
@@ -124,6 +126,7 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
     loading: false,
     error: action.payload.error,
   }))
+
   .handleAction(getByTitleAction.request, (state) => ({
     ...state,
     loading: true,
@@ -139,6 +142,7 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
     error: action.payload.error,
     searchedFilms: initialState.searchedFilms,
   }))
+
   .handleAction(getInfoAboutFilmAction.request, (state) => ({
     ...state,
     loading: true,
@@ -157,6 +161,7 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
     loading: false,
     error: action.payload.error,
   }))
+
   .handleAction(getInfoAboutSeasonsAction.request, (state) => ({
     ...state,
     loading: true,
@@ -171,6 +176,7 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
     loading: false,
     error: action.payload.error,
   }))
+
   .handleAction(addRatingAction.request, (state) => ({
     ...state,
     loading: true,
@@ -185,6 +191,7 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
     loading: false,
     error: action.payload.error,
   }))
+
   .handleAction(removeRatingAction.request, (state) => ({
     ...state,
     loading: true,

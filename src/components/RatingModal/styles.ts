@@ -10,9 +10,14 @@ export const RatingBlock = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  padding: 0px 1px;
+  padding: 0px 3px;
+  margin-top: 10%;
 
-  margin-top: 5px;
+  @media (max-width: 992px) {
+    max-width: 450px;
+    min-height: 50px;
+    padding: 0px 7px;
+  }
 `;
 
 export const RatingItem = styled.div`
@@ -25,8 +30,19 @@ export const RatingItem = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  transition: all 0.2s;
+  user-select: none;
+  cursor: pointer;
 
   &:hover {
     background-color: ${(props) => props.theme.colors.accentColor};
+    color: ${(props) => props.theme.colors.textColor};
+    font-weight: 700;
+    font-size: larger;
+  }
+
+  @media (max-width: 992px) {
+    height: 35px;
+    max-width: 35px;
   }
 `;

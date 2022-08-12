@@ -83,7 +83,7 @@ export const SliderCardInfo = styled.div`
   ${MovieCardInfoCss}
 `;
 
-export const SliderIconStar = styled(MdStarOutline)`
+export const SliderRatingStar = styled(MdStarOutline)`
   ${MovieIconStarCss}
 `;
 
@@ -102,11 +102,11 @@ export const SliderCard = styled.div`
     &:before {
       opacity: 0.8;
     }
-    ${SliderCardInfo}, ${SliderIconStar} {
+    ${SliderCardInfo}, ${SliderRatingStar} {
       opacity: 1;
       transform: translateY(0);
     }
-    ${SliderIconStar} {
+    ${SliderRatingStar} {
       transform: rotate(144deg);
     }
   }

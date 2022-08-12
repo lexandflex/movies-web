@@ -57,7 +57,8 @@
           ["@constants", "./src/constants"],
           ["@router", "./src/router"],
           ["@models", "./src/models"],
-          ["@configs", "./src/configs"]
+          ["@configs", "./src/configs"],
+          ["@styles", "./src/styles"]
         ],
         "extensions": [".ts", ".js", ".json", ".tsx"]
       }
