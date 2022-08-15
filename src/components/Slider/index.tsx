@@ -4,7 +4,7 @@ import { AppText } from '@components/AppText';
 import * as Styles from './styles';
 import { Props } from './types';
 
-export const Slider: FC<Props> = ({ slides, onClick, handleShowModal }) => {
+export const Slider: FC<Props> = ({ slides, onClick }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const sliderCardRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +32,6 @@ export const Slider: FC<Props> = ({ slides, onClick, handleShowModal }) => {
           {slides.map((slide) => (
             <Styles.SliderCard key={slide.id}>
               <Styles.SliderCardImage src={slide.image} alt="logo" />
-              <Styles.SliderRatingStar title="Оценить" onClick={handleShowModal} />
               <Styles.SliderCardInfo>
                 <AppText text={slide.name} tag="h1" />
                 <AppText text={slide.countries} />

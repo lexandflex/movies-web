@@ -1,10 +1,8 @@
 import styled from 'styled-components';
-import { MdStarOutline } from 'react-icons/md';
 import {
   MovieCardCss,
   MovieCardImageCss,
   MovieCardInfoCss,
-  MovieIconStarCss,
 } from '../../styles/movieCard';
 
 export const Container = styled.div`
@@ -28,10 +26,6 @@ export const MovieCardInfo = styled.div`
   }
 `;
 
-export const MovieIconStar = styled(MdStarOutline)`
-  ${MovieIconStarCss}
-`;
-
 export const MovieContainer = styled.div`
   ${MovieCardCss}
 
@@ -48,12 +42,9 @@ export const MovieContainer = styled.div`
     &:before {
       opacity: 0.8;
     }
-    ${MovieCardInfo}, ${MovieIconStar} {
+    ${MovieCardInfo} {
       opacity: 1;
       transform: translateY(0);
-    }
-    ${MovieIconStar} {
-      transform: rotate(144deg);
     }
   }
 

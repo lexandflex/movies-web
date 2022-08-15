@@ -1,3 +1,4 @@
+import { MdStarOutline } from 'react-icons/md';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -14,6 +15,7 @@ export const MainInfo = styled.div`
   padding: 16px;
   border: 2px solid ${(props) => props.theme.colors.accentColor};
   margin-right: 1rem;
+  position: relative;
 
   & p {
     color: ${(props) => props.theme.colors.secondTextColor};
@@ -23,7 +25,7 @@ export const MainInfo = styled.div`
     color: ${(props) => props.theme.colors.altTextColor};
   }
 
-  & p:nth-child(3) {
+  & p:nth-child(4) {
     padding: 2rem 0;
     position: relative;
     :after {
@@ -38,7 +40,7 @@ export const MainInfo = styled.div`
     }
   }
 
-  & p:nth-child(4) {
+  & p:nth-child(5) {
     margin-top: 1rem;
   }
 
@@ -52,4 +54,24 @@ export const Player = styled.div`
   flex: 1;
   width: 100%;
   height: 100%;
+`;
+
+export const RatingStar = styled(MdStarOutline)`
+  cursor: pointer;
+  position: absolute;
+  right: 2%;
+  top: 3%;
+  opacity: 1;
+  font-size: 3rem;
+  z-index: 3;
+  transition: 0.4s;
+
+  &:hover {
+    fill: ${(props) => props.theme.colors.ratingStarColor};
+    transform: rotateZ(72deg);
+  }
+
+  @media (max-width: 992px) {
+    font-size: 2rem;
+  }
 `;

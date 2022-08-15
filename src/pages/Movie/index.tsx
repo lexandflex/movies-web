@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { filmsSelector } from '@store/selectors';
-import { getInfoAboutFilmAction } from '@store/actions/movies';
+import { filmsSelector, movieRatingSelector } from '@store/selectors';
+import { getInfoAboutFilmAction, getRatingAction } from '@store/actions/movies';
 import { AppText } from '@components/AppText';
+import { RatingModal } from '@components/RatingModal';
 import { declOfNum } from '@utils/declOfNum';
 import * as Styled from './styles';
 
@@ -11,6 +12,12 @@ export const Movie: FC = () => {
   const dispatch = useDispatch();
   const films = useSelector(filmsSelector);
   const { id } = useParams();
+  const [showModal, setShowModal] = useState(false);
+  const { totalRating, numberOfAppraisers } = useSelector(movieRatingSelector);
+
+  const handleShowModal = () => {
+    setShowModal(!showModal);
+  };
 
   const currentFilm = useMemo(() => films[id || ''], [films, id]);
 
@@ -19,6 +26,7 @@ export const Movie: FC = () => {
   useEffect(() => {
     if (id) {
       dispatch(getInfoAboutFilmAction.request({ id }));
+      dispatch(getRatingAction.request({ id }));
     }
 
     const script = document.createElement('script');
@@ -33,6 +41,7 @@ export const Movie: FC = () => {
   return (
     <Styled.Container>
       <Styled.MainInfo>
+        <Styled.RatingStar title="Рейтинг" onClick={handleShowModal} />
         <AppText tag='h1' size='xl' text={currentFilm?.nameRu || ''} />
         <AppText
           size='sm'
@@ -57,6 +66,14 @@ export const Movie: FC = () => {
       <Styled.Player>
         <div id='yohoho' data-kinopoisk={id} />
       </Styled.Player>
+
+      <RatingModal
+        showModal={showModal}
+        onClose={handleShowModal}
+        totalVotes={numberOfAppraisers}
+        totalRate={totalRating}
+        filmId={id as string}
+      />
     </Styled.Container>
   );
 };

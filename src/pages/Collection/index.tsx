@@ -3,7 +3,6 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { MoviesGrid } from '../../components/MoviesGrid';
-import { RatingModal } from '../../components/RatingModal';
 import { MovieCollections } from '../../constants/movieCollections';
 import { RouteNames } from '../../router/routeNames';
 import { getByGenreAction, getGenresAction, getTopAction } from '../../store/actions/movies';
@@ -107,28 +106,17 @@ export const Collection: FC = () => {
     }
   }, [moviesByGenre, name, genreId]);
 
-  const [showModal, setShowModal] = useState(false);
-
-  const handleShowModal = () => {
-    setShowModal(!showModal);
-  };
-
   const handleClickShowMore = () => {
     setPage((prevState) => prevState + 1);
   };
 
   return (
-    <>
-      <Styled.Container>
+    <Styled.Container>
         <MoviesGrid
           movies={Object.values(films)}
           onClick={handleMovieClick}
-          handleShowModal={handleShowModal}
         />
         <Styled.ShowMoreIcon onClick={handleClickShowMore} isActive={page < numberOfPages} />
       </Styled.Container>
-
-      <RatingModal showModal={showModal} onClose={handleShowModal} />
-    </>
   );
 };

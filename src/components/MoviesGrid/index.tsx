@@ -4,7 +4,7 @@ import { AppText } from '../AppText';
 import * as Styled from './styles';
 import { Props } from './types';
 
-export const MoviesGrid: FC<Props> = ({ movies, onClick, handleShowModal }) => {
+export const MoviesGrid: FC<Props> = ({ movies, onClick }) => {
   const handleMovieClick = (id: string) => () => {
     onClick?.(id);
   };
@@ -14,7 +14,6 @@ export const MoviesGrid: FC<Props> = ({ movies, onClick, handleShowModal }) => {
       {movies.map((movie) => (
         <Styled.MovieContainer key={movie.id}>
           <Styled.MovieCardImage src={movie.image} alt="logo" />
-          <Styled.MovieIconStar title="Оценить" onClick={handleShowModal} />
           <Styled.MovieCardInfo>
             <AppText text={movie.name} tag="h1" />
             <AppText text={movie.countries} />

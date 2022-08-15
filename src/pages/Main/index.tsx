@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RouteNames } from '@router/routeNames';
 import { Navigator } from '@services/navigatorService';
-import { RatingModal } from '@components/RatingModal';
 import { Slider } from '@components/Slider';
 import { MovieCollections } from '@constants/movieCollections';
 import { getByGenreAction, getGenresAction, getTopAction } from '@store/actions/movies';
@@ -104,12 +103,6 @@ export const Main: FC = () => {
     dispatch(getTopAction.request({ page }));
   }, [dispatch, page]);
 
-  const [showModal, setShowModal] = useState(false);
-
-  const handleShowModal = () => {
-    setShowModal(!showModal);
-  };
-
   return (
     <Styled.Container>
       <Styled.MovieCategoryContainer>
@@ -118,7 +111,6 @@ export const Main: FC = () => {
         <Slider
           slides={topFilmsSlides}
           onClick={handleSlideClick}
-          handleShowModal={handleShowModal}
         />
       </Styled.MovieCategoryContainer>
 
@@ -131,16 +123,12 @@ export const Main: FC = () => {
               <Slider
                 slides={filmsByGenreSlides[id]}
                 onClick={handleSlideClick}
-                handleShowModal={handleShowModal}
               />
             </Styled.MovieCategoryContainer>
           );
         }
-
         return null;
       })}
-
-      <RatingModal showModal={showModal} onClose={handleShowModal} />
     </Styled.Container>
   );
 };

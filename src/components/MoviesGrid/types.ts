@@ -8,5 +8,4 @@ export interface Props {
     countries: string | '';
   }[];
   onClick?: (id: string) => void;
-  handleShowModal: () => void;
 }

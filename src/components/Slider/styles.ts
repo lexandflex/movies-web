@@ -1,10 +1,9 @@
 import styled, { css } from 'styled-components';
-import { MdChevronLeft, MdChevronRight, MdStarOutline } from 'react-icons/md';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import {
   MovieCardCss,
   MovieCardImageCss,
   MovieCardInfoCss,
-  MovieIconStarCss,
 } from '../../styles/movieCard';
 
 export const Container = styled.div`
@@ -83,10 +82,6 @@ export const SliderCardInfo = styled.div`
   ${MovieCardInfoCss}
 `;
 
-export const SliderRatingStar = styled(MdStarOutline)`
-  ${MovieIconStarCss}
-`;
-
 export const SliderCard = styled.div`
   ${MovieCardCss}
 
@@ -102,12 +97,9 @@ export const SliderCard = styled.div`
     &:before {
       opacity: 0.8;
     }
-    ${SliderCardInfo}, ${SliderRatingStar} {
+    ${SliderCardInfo} {
       opacity: 1;
       transform: translateY(0);
-    }
-    ${SliderRatingStar} {
-      transform: rotate(144deg);
     }
   }
 

@@ -32,26 +32,6 @@ export const MovieCardInfoCss = css`
   }
 `;
 
-export const MovieIconStarCss = css`
-  cursor: pointer;
-  position: absolute;
-  right: 7%;
-  top: 3%;
-  opacity: 0;
-  font-size: 2rem;
-  z-index: 3;
-  transform: translateX(50%);
-  transition: 0.5s;
-
-  &:hover {
-    fill: ${(props) => props.theme.colors.ratingStarColor};
-  }
-
-  @media (max-width: 992px) {
-    font-size: 1rem;
-  }
-`;
-
 export const MovieCardCss = css`
   position: relative;
   transition: 0.4s ease-out;
