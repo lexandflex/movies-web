@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getByTitleAction } from '@store/actions/movies';
 import { searchedFilmsSelector } from '@store/selectors';
+import { logoutAction } from '@store/actions/auth';
 import { AppText } from '@components/AppText';
 import { SearchModal } from '@components/SearchModal';
 import { AppLogo } from '@components/AppLogo';
@@ -37,6 +38,10 @@ export const Header = () => {
     setShowDropdown((prevState) => !prevState);
   };
 
+  const handleLogout = () => {
+    dispatch(logoutAction.request());
+  };
+
   const SearchComponent = (
     <Styled.SearchWrapper onClick={handleSearchClick} title='Поиск'>
       <Styled.SearchIcon />
@@ -55,12 +60,10 @@ export const Header = () => {
             <Styled.DropDown>
               <ul>
                 {DROPDOWN_LINKS.map((dropdownLink) => (
-                  <li key={dropdownLink.link}>
-                    <Styled.DropDownItem href={dropdownLink.link}>
-                      {dropdownLink.icon}
-                      <p>{dropdownLink.title}</p>
-                    </Styled.DropDownItem>
-                  </li>
+                  <Styled.DropDownItem key={dropdownLink.link} onClick={handleLogout}>
+                    {dropdownLink.icon}
+                    <p>{dropdownLink.title}</p>
+                  </Styled.DropDownItem>
                 ))}
               </ul>
             </Styled.DropDown>

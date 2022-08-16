@@ -121,7 +121,7 @@ export const DropDownItemIcon = styled(IoLogOutOutline)`
   }
 `;
 
-export const DropDownItem = styled.a`
+export const DropDownItem = styled.li`
   padding: 5px 40px 0px 40px;
   display: flex;
   flex-direction: row;
@@ -129,7 +129,6 @@ export const DropDownItem = styled.a`
   align-items: center;
   color: ${(props) => props.theme.colors.secondTextColor};
   border-bottom: none;
-  text-decoration: none;
   font-size: 1rem;
 
   &:hover ${DropDownItemIcon} {

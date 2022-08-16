@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from '@components/Modal';
+import { isAuthenticatedSelector } from '@store/selectors';
 import { addRatingAction } from '@store/actions/movies';
 import { Props } from './types';
 import * as Styled from './styles';
@@ -16,6 +17,9 @@ export const RatingModal: FC<Props> = ({ showModal, onClose, totalVotes, totalRa
     dispatch(addRatingAction.request({kinopoiskId: filmId, rating: ratingItem}));
   };
 
+  const isAuth = useSelector(isAuthenticatedSelector);
+  console.log('isAuth: ', isAuth);  
+
   return (
     <Modal
       showModal={showModal}
@@ -24,7 +28,7 @@ export const RatingModal: FC<Props> = ({ showModal, onClose, totalVotes, totalRa
       text={`Количество оценок : ${totalVotes}`}
     >
       <Styled.RatingBlock>
-        {RATING_ITEMS.map((ratingItem) => (
+        {isAuth ? RATING_ITEMS.map((ratingItem) => (
           <Styled.RatingItem
             key={ratingItem}
             title={`Поставить оценку ${ratingItem}`}
@@ -32,7 +36,9 @@ export const RatingModal: FC<Props> = ({ showModal, onClose, totalVotes, totalRa
           >
             {ratingItem}
           </Styled.RatingItem>
-        ))}
+        )) : (
+          <Styled.NotifyBlock>Авторизуйтесь, чтобы оценить фильм</Styled.NotifyBlock>
+        )}
       </Styled.RatingBlock>
     </Modal>
   );

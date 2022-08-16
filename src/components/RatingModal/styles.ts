@@ -46,3 +46,17 @@ export const RatingItem = styled.div`
     max-width: 35px;
   }
 `;
+
+export const NotifyBlock = styled.div`
+  display: flex;
+  width: 100%;
+  min-height: 60px;
+  border-radius: 16px;
+  margin-top: 10%;
+
+  @media (max-width: 992px) {
+    max-width: 450px;
+    min-height: 50px;
+    padding: 0px 7px;
+  }
+`;

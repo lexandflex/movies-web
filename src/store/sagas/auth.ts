@@ -1,3 +1,4 @@
+import { call, Effect, put, SagaReturnType, select, takeLatest } from 'redux-saga/effects';
 import { ActionType } from 'typesafe-actions';
 import { AuthService } from '@services/authService';
 import {
@@ -7,7 +8,7 @@ import {
   registerAction,
   setTokenAction,
 } from '@store/actions/auth';
-import { call, Effect, put, SagaReturnType, takeLatest } from 'redux-saga/effects';
+import { authRefreshTokenSelector } from '@store/selectors';
 import { Navigator } from '@services/navigatorService';
 import { RouteNames } from '@router/routeNames';
 import { StorageKeys } from '../../constants/storageKeys';
@@ -97,6 +98,7 @@ export class AuthSagaWorker {
           refreshToken: '',
         }),
       );
+      yield put(logoutAction.success());
     } catch (error: any) {
       yield put(logoutAction.failure({ error: error.message }));
     }

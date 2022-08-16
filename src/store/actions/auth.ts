@@ -47,7 +47,7 @@ export const logoutAction = createAsyncAction(
   AuthTypes.Logout,
   AuthTypes.LogoutSuccess,
   AuthTypes.LogoutFailed,
-)<undefined, null, Error>();
+)<void, void, Error>();
 
 export type AuthActionUnion =
   | ActionType<typeof setTokenAction>
