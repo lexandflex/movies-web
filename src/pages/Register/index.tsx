@@ -1,15 +1,12 @@
 import React, { ReactElement } from 'react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { AppInput } from '@components/AppInput';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AppButton } from '@components/AppButton';
-import { useDispatch } from 'react-redux';
-import { Navigator } from '@services/navigatorService';
-import { RouteNames } from '@router/routeNames';
+import { AppForm } from '@components/AppForm';
 import { registerAction } from '@store/actions/auth';
 import { registerSchema } from './yupSchema';
-import { AppForm } from '../../components/AppForm';
-import { FormFields } from './types';
 
 export const Register = (): ReactElement => {
   const dispatch = useDispatch();
@@ -19,7 +16,6 @@ export const Register = (): ReactElement => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(registerSchema), mode: 'onChange' });
 
-  console.log({ errors });
   const onSubmit = (data: any) => {
     console.log({ data });
     dispatch(registerAction.request({ email: data.email, password: data.password }));

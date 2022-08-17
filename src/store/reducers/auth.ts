@@ -32,7 +32,7 @@ export const authReducer = createReducer<AuthState, AuthActionUnion>(initialStat
   .handleAction(loginAction.failure, (state, action) => ({
     ...state,
     loading: false,
-    error: action.payload.error,
+    error: action.payload.error.message,
   }))
   .handleAction(setTokenAction, (state, action) => ({
     ...state,

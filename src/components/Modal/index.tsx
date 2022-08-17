@@ -2,7 +2,13 @@ import React, { FC, useRef } from 'react';
 import * as Styled from './styles';
 import { Props } from './types';
 
-export const Modal: FC<Props> = ({ showModal, onClose, title = '', text = '', children }) => {
+export const Modal: FC<Props> = ({
+  showModal,
+  onClose,
+  title = '',
+  text = '',
+  children
+}) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleClickCloseModalButton = () => {
@@ -29,7 +35,7 @@ export const Modal: FC<Props> = ({ showModal, onClose, title = '', text = '', ch
               </Styled.ContentContainer>
             </Styled.ModalContent>
             <Styled.CloseModalButton
-              aria-label="Close modal"
+              aria-label='Close modal'
               onClick={handleClickCloseModalButton}
               title='Закрыть'
             />

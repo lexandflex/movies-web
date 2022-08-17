@@ -3,21 +3,24 @@ import { useForm } from 'react-hook-form';
 import { AppInput } from '@components/AppInput';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AppButton } from '@components/AppButton';
-import { useDispatch } from 'react-redux';
+import { AppForm } from '@components/AppForm';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '@store/actions/auth';
-import { AppSpinner } from '@components/AppSpinner';
+import { authErrorSelector } from '@store/selectors';
 import { loginSchema } from './yupSchema';
-import { AppForm } from '../../components/AppForm';
 
 export const Login = (): ReactElement => {
+
   const dispatch = useDispatch();
+  const serverError = useSelector(authErrorSelector);
+  console.log('serverError ', serverError);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema), mode: 'onChange' });
 
-  console.log({ errors });
   const onSubmit = (data: any) => {
     dispatch(loginAction.request({ email: data.email, password: data.password }));
   };

@@ -1,3 +1,4 @@
+import { MdDeleteForever } from 'react-icons/md';
 import styled from 'styled-components';
 
 export const RatingBlock = styled.div`
@@ -56,14 +57,33 @@ export const RatingItem = styled.div`
 
 export const NotifyBlock = styled.div`
   display: flex;
+  justify-content: center;
   width: 100%;
   min-height: 60px;
   border-radius: 16px;
   margin-top: 10%;
+  padding: 0 2rem;
 
   @media (max-width: 992px) {
     max-width: 450px;
     min-height: 50px;
     padding: 0px 7px;
+  }
+`;
+
+export const ResetRatingButton = styled(MdDeleteForever)`
+  cursor: pointer;
+  position: absolute;
+  top: 75px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  z-index: 10;
+  transition: all 0.2s;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.accentColor};
+    transform: scaleY(1.2);
   }
 `;

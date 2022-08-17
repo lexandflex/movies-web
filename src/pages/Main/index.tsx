@@ -7,7 +7,7 @@ import { Slider } from '@components/Slider';
 import { MovieCollections } from '@constants/movieCollections';
 import { getByGenreAction, getGenresAction, getTopAction } from '@store/actions/movies';
 import { State } from '@store/reducers';
-import { Genre, MoviesByGenre } from '../../models/movies';
+import { Genre, MoviesByGenre } from '@models/movies';
 import * as Styled from './styles';
 
 const COLLECTIONS = [

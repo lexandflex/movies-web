@@ -29,7 +29,7 @@ export const loginAction = createAsyncAction(
   AuthTypes.Login,
   AuthTypes.LoginSuccess,
   AuthTypes.LoginFailed,
-)<AuthParams, ResponseType, Error>();
+)<AuthParams, ResponseType, { error: { message: string }  }>();
 
 export const registerAction = createAsyncAction(
   AuthTypes.Register,

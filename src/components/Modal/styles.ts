@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MdClose } from 'react-icons/md';
+import { MdClose, MdDeleteForever } from 'react-icons/md';
 
 export const Container = styled.div`
   background: rgba(0, 0, 0, 0.8);

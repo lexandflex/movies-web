@@ -1,12 +1,12 @@
-import { Navigator } from '@services/navigatorService';
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { MoviesGrid } from '../../components/MoviesGrid';
-import { MovieCollections } from '../../constants/movieCollections';
-import { RouteNames } from '../../router/routeNames';
-import { getByGenreAction, getGenresAction, getTopAction } from '../../store/actions/movies';
-import { State } from '../../store/reducers';
+import { Navigator } from '@services/navigatorService';
+import { MoviesGrid } from '@components/MoviesGrid';
+import { MovieCollections } from '@constants/movieCollections';
+import { RouteNames } from '@router/routeNames';
+import { getByGenreAction, getGenresAction, getTopAction } from '@store/actions/movies';
+import { State } from '@store/reducers';
 import * as Styled from './styles';
 import { Movies } from './types';
 

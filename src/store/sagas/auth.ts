@@ -1,4 +1,4 @@
-import { call, Effect, put, SagaReturnType, select, takeLatest } from 'redux-saga/effects';
+import { call, Effect, put, SagaReturnType, takeLatest } from 'redux-saga/effects';
 import { ActionType } from 'typesafe-actions';
 import { AuthService } from '@services/authService';
 import { loginAction, logoutAction, registerAction, setTokenAction } from '@store/actions/auth';
@@ -73,6 +73,7 @@ export class AuthSagaWorker {
         }),
       );
       yield put(logoutAction.success());
+      Navigator.push(RouteNames.LOGIN);
     } catch (error: any) {
       yield put(logoutAction.failure({ error: error.message }));
     }

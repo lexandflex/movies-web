@@ -11,3 +11,8 @@ export const authRefreshTokenSelector = createSelector(
   authStateSelector,
   state => state.refreshToken,
 );
+
+export const authErrorSelector = createSelector(
+  authStateSelector,
+  state => state.error,
+);
