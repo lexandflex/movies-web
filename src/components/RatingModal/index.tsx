@@ -30,8 +30,10 @@ export const RatingModal: FC<Props> = ({
     <Modal
       showModal={showModal}
       onClose={onClose}
-      title={`Рейтинг : ${totalVotes !== 0 ? (totalRate / totalVotes).toFixed(2) : 'отсутствует'}`}
-      text={`Количество оценок : ${totalVotes}`}
+      title={`Рейтинг : ${
+        totalRate && totalVotes ? (totalRate / totalVotes).toFixed(2) : 'отсутствует'
+      }`}
+      text={`Количество оценок : ${totalVotes || 0}`}
     >
       <Styled.RatingBlock>
         {isAuth ? (

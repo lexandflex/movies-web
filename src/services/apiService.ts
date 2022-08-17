@@ -36,6 +36,7 @@ export class ApiService {
         if (
           originalConfig.url !== '/auth/signIn' &&
           originalConfig.url !== '/auth/signUp' &&
+          originalConfig.url !== '/auth/refresh-tokens' &&
           resp
         ) {
           // eslint-disable-next-line no-underscore-dangle
@@ -57,9 +58,10 @@ export class ApiService {
                   return this.api(originalConfig);
                 })
                 .catch(() => {
-                  setTokenAction({ token: '', refreshToken: '' });
+                  dispatch(setTokenAction({ token: '', refreshToken: '' }));
                   localStorage.removeItem(StorageKeys.RefreshToken);
                   localStorage.removeItem(StorageKeys.Token);
+                  throw error;
                 });
             } catch (_error: any) {
               return Promise.reject(_error.response.data);
