@@ -138,6 +138,7 @@ export interface MovieRatingResponse {
   totalRating: number;
   numberOfAppraisers: number;
   appraisers: [{ userId: string | null; rating: number }];
+  yourRating: number;
 }
 
 export interface KinopoiskId {

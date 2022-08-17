@@ -1,4 +1,6 @@
+import jwtDecode from 'jwt-decode';
 import { ApiService } from './apiService';
+import { StorageKeys } from '../constants/storageKeys';
 
 export class MoviesService {
   static async getTop(page: number) {
@@ -26,16 +28,22 @@ export class MoviesService {
   }
 
   static async addARatingToAFilm(kinopoiskId: string, rating: number) {
-    return ApiService.api.post('/movies/add-rating', { kinopoiskId, rating });
+    return ApiService.api.post('/movies/add-rating', { kinopoiskId: Number(kinopoiskId), rating });
   }
 
   static async getARatingByKinopoiskId(id: string) {
-    return ApiService.api.get(`/movies/${id}/get-rating`);
+    const token = localStorage.getItem(StorageKeys.Token);
+    let userId = '';
+    if (token) {
+      const decoded: any = jwtDecode(token || '');
+      userId = decoded?.userId || '';
+    }
+    return ApiService.api.get(`/movies/${id}/get-rating${userId ? `?userId=${userId}` : ''}`);
   }
 
   static async removeRatingFromAFilm(kinopoiskId: string) {
     return ApiService.api.delete('/movies/remove-rating', {
-      data: { kinopoiskId },
+      data: { kinopoiskId: Number(kinopoiskId) },
     });
   }
 }

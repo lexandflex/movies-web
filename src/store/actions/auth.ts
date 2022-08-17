@@ -37,12 +37,6 @@ export const registerAction = createAsyncAction(
   AuthTypes.RegisterFailed,
 )<AuthParams, ResponseType, Error>();
 
-export const refreshTokensAction = createAsyncAction(
-  AuthTypes.RefreshTokens,
-  AuthTypes.RefreshTokensSuccess,
-  AuthTypes.RefreshTokensFailed,
-)<undefined, ResponseType, Error>();
-
 export const logoutAction = createAsyncAction(
   AuthTypes.Logout,
   AuthTypes.LogoutSuccess,
@@ -53,5 +47,4 @@ export type AuthActionUnion =
   | ActionType<typeof setTokenAction>
   | ActionType<typeof loginAction>
   | ActionType<typeof registerAction>
-  | ActionType<typeof refreshTokensAction>
   | ActionType<typeof logoutAction>;

@@ -13,13 +13,15 @@ export const Movie: FC = () => {
   const films = useSelector(filmsSelector);
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
-  const { totalRating, numberOfAppraisers } = useSelector(movieRatingSelector);
+  const { totalRating, numberOfAppraisers, yourRating } = useSelector(movieRatingSelector);
 
   const handleShowModal = () => {
     setShowModal(!showModal);
   };
 
   const currentFilm = useMemo(() => films[id || ''], [films, id]);
+
+  console.log({ id, totalRating, numberOfAppraisers });
 
   console.log({ currentFilm });
 
@@ -42,9 +44,9 @@ export const Movie: FC = () => {
     <Styled.Container>
       <Styled.MainInfo>
         <Styled.RatingStar title="Рейтинг" onClick={handleShowModal} />
-        <AppText tag='h1' size='xl' text={currentFilm?.nameRu || ''} />
+        <AppText tag="h1" size="xl" text={currentFilm?.nameRu || ''} />
         <AppText
-          size='sm'
+          size="sm"
           text={`${currentFilm?.nameOriginal || ''} (${currentFilm?.countries[0].country})`}
         />
         <AppText text={currentFilm?.description || ''} />
@@ -64,7 +66,7 @@ export const Movie: FC = () => {
         />
       </Styled.MainInfo>
       <Styled.Player>
-        <div id='yohoho' data-kinopoisk={id} />
+        <div id="yohoho" data-kinopoisk={id} />
       </Styled.Player>
 
       <RatingModal
@@ -72,6 +74,7 @@ export const Movie: FC = () => {
         onClose={handleShowModal}
         totalVotes={numberOfAppraisers}
         totalRate={totalRating}
+        yourRating={yourRating}
         filmId={id as string}
       />
     </Styled.Container>

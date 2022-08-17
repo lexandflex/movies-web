@@ -3,5 +3,6 @@ export interface Props {
   onClose: (flag: boolean) => void;
   totalVotes: number;
   totalRate: number;
+  yourRating: number;
   filmId: string;
 }

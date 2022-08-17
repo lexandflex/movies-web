@@ -1,7 +1,7 @@
 import { StorageKeys } from '@constants/storageKeys';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { store } from '..';
-import { refreshTokensAction } from '../store/actions/auth';
+import { setTokenAction } from '../store/actions/auth';
 
 export class ApiService {
   static api: AxiosInstance;
@@ -11,15 +11,23 @@ export class ApiService {
 
     ApiService.api.interceptors.request.use((config: AxiosRequestConfig) => {
       const token = localStorage.getItem(StorageKeys.Token);
-      if (token) {
+      const refreshToken = localStorage.getItem(StorageKeys.RefreshToken);
+      if (token && refreshToken) {
         if (config.headers) {
-          // eslint-disable-next-line no-param-reassign
-          config.headers.Authorization = `Bearer ${token}`;
+          if (config.url === '/auth/refresh-tokens' || config.url === '/auth/logout') {
+            // eslint-disable-next-line no-param-reassign
+            config.headers.Authorization = `Bearer ${refreshToken}`;
+          } else {
+            // eslint-disable-next-line no-param-reassign
+            config.headers.Authorization = `Bearer ${token}`;
+          }
         }
       }
       return config;
     });
+
     const { dispatch } = store;
+
     ApiService.api.interceptors.response.use(
       (response) => response,
       (error) => {
@@ -32,10 +40,27 @@ export class ApiService {
         ) {
           // eslint-disable-next-line no-underscore-dangle
           if (resp.data.message === 'TokenExpired' && !originalConfig._retry) {
-            // eslint-disable-next-line no-underscore-dangle
-            originalConfig._retry = true;
             try {
-              dispatch(refreshTokensAction.request());
+              return this.api
+                .post('/auth/refresh-tokens', null)
+                .then((response) => {
+                  const { data } = response;
+                  dispatch(
+                    setTokenAction({ token: data.accessToken, refreshToken: data.refreshToken }),
+                  );
+                  localStorage.setItem(StorageKeys.Token, data.accessToken);
+                  localStorage.setItem(StorageKeys.RefreshToken, data.refreshToken);
+
+                  originalConfig.headers.Authorization = `Bearer ${data.accessToken}`;
+                  // eslint-disable-next-line no-underscore-dangle
+                  originalConfig._retry = true;
+                  return this.api(originalConfig);
+                })
+                .catch(() => {
+                  setTokenAction({ token: '', refreshToken: '' });
+                  localStorage.removeItem(StorageKeys.RefreshToken);
+                  localStorage.removeItem(StorageKeys.Token);
+                });
             } catch (_error: any) {
               return Promise.reject(_error.response.data);
             }

@@ -34,6 +34,13 @@ export const RatingItem = styled.div`
   user-select: none;
   cursor: pointer;
 
+  background-color: ${({ selectedByYou, theme }: { selectedByYou: boolean; theme: any }) =>
+    selectedByYou && theme.colors.accentColor};
+  color: ${({ selectedByYou, theme }: { selectedByYou: boolean; theme: any }) =>
+    selectedByYou && theme.colors.textColor};
+  font-weight: ${({ selectedByYou }: { selectedByYou: boolean }) => selectedByYou && 700};
+  font-size: ${({ selectedByYou }: { selectedByYou: boolean }) => selectedByYou && 'large'};
+
   &:hover {
     background-color: ${(props) => props.theme.colors.accentColor};
     color: ${(props) => props.theme.colors.textColor};

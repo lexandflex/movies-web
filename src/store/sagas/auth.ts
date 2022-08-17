@@ -1,14 +1,7 @@
 import { call, Effect, put, SagaReturnType, select, takeLatest } from 'redux-saga/effects';
 import { ActionType } from 'typesafe-actions';
 import { AuthService } from '@services/authService';
-import {
-  loginAction,
-  logoutAction,
-  refreshTokensAction,
-  registerAction,
-  setTokenAction,
-} from '@store/actions/auth';
-import { authRefreshTokenSelector } from '@store/selectors';
+import { loginAction, logoutAction, registerAction, setTokenAction } from '@store/actions/auth';
 import { Navigator } from '@services/navigatorService';
 import { RouteNames } from '@router/routeNames';
 import { StorageKeys } from '../../constants/storageKeys';
@@ -66,25 +59,6 @@ export class AuthSagaWorker {
     }
   }
 
-  static *refreshTokens() {
-    try {
-      const response: SagaReturnType<typeof AuthService.refreshTokens> = yield call(
-        AuthService.refreshTokens,
-      );
-
-      putTokensInLocalStorage(response.data.accessToken, response.data.refreshToken);
-
-      yield put(
-        setTokenAction({
-          token: response.data.accessToken,
-          refreshToken: response.data.refreshToken,
-        }),
-      );
-    } catch (error: any) {
-      yield put(refreshTokensAction.failure({ error: error.message }));
-    }
-  }
-
   static *logout() {
     try {
       yield call(AuthService.logout);
@@ -108,6 +82,5 @@ export class AuthSagaWorker {
 export function* authSaga(): Generator<Effect, void> {
   yield takeLatest(registerAction.request, AuthSagaWorker.register);
   yield takeLatest(loginAction.request, AuthSagaWorker.login);
-  yield takeLatest(refreshTokensAction.request, AuthSagaWorker.refreshTokens);
   yield takeLatest(logoutAction.request, AuthSagaWorker.logout);
 }

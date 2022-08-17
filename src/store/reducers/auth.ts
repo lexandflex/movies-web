@@ -2,7 +2,6 @@ import {
   AuthActionUnion,
   loginAction,
   logoutAction,
-  refreshTokensAction,
   registerAction,
   setTokenAction,
 } from '@store/actions/auth';
@@ -49,16 +48,6 @@ export const authReducer = createReducer<AuthState, AuthActionUnion>(initialStat
     loading: false,
   }))
   .handleAction(registerAction.failure, (state, action) => ({
-    ...state,
-    loading: false,
-    error: action.payload.error,
-  }))
-  .handleAction(refreshTokensAction.request, (state) => ({
-    ...state,
-    loading: true,
-  }))
-  .handleAction(refreshTokensAction.success, (state) => ({ ...state, loading: false }))
-  .handleAction(refreshTokensAction.failure, (state, action) => ({
     ...state,
     loading: false,
     error: action.payload.error,

@@ -21,7 +21,7 @@ export const Collection: FC = () => {
 
   const [genreId, setGenreId] = useState('');
 
-  const [numberOfPages, setNumberOfPages] = useState(0);
+  const [numberOfPages, setNumberOfPages] = useState(1);
 
   const handleMovieClick = (id: string) => {
     Navigator.push(`/${RouteNames.MOVIES}/${id}`);
@@ -35,21 +35,31 @@ export const Collection: FC = () => {
     }
   }, []);
 
+  console.log({
+    name,
+    page,
+    genreId,
+    numberOfPages,
+  });
+
   useEffect(() => {
     if (name === MovieCollections.Top) {
       setNumberOfPages(topFilms.pagesCount);
     } else {
-      setNumberOfPages(moviesByGenre[genreId]?.totalPages || 0);
+      setNumberOfPages(moviesByGenre[genreId]?.totalPages || 1);
     }
-  }, [topFilms, moviesByGenre, genreId]);
+  }, [topFilms, moviesByGenre, genreId, name]);
+
+  useEffect(() => {
+    const genreId = genres.find((genre) => genre.genre === name)?.id.toString() || '';
+    setGenreId(genreId);
+  }, [genres, name]);
 
   useEffect(() => {
     if (page <= numberOfPages) {
       if (name === MovieCollections.Top) {
         dispatch(getTopAction.request({ page }));
       } else {
-        const genreId = genres.find((genre) => genre.genre === name)?.id.toString() || '';
-        setGenreId(genreId);
         dispatch(
           getByGenreAction.request({
             genreId,
@@ -58,9 +68,9 @@ export const Collection: FC = () => {
         );
       }
     }
-  }, [dispatch, page, genres, name]);
+  }, [dispatch, page, genres, name, genreId, numberOfPages]);
 
-  useMemo(() => {
+  useEffect(() => {
     if (name === MovieCollections.Top) {
       const nextPage = topFilms.films.reduce<Movies>(
         (prev, current) => ({
@@ -83,7 +93,7 @@ export const Collection: FC = () => {
     }
   }, [topFilms, name]);
 
-  useMemo(() => {
+  useEffect(() => {
     if (name !== MovieCollections.Top) {
       const nextPage = moviesByGenre[genreId]?.items.reduce<Movies>(
         (prev, current) => ({
@@ -112,11 +122,8 @@ export const Collection: FC = () => {
 
   return (
     <Styled.Container>
-        <MoviesGrid
-          movies={Object.values(films)}
-          onClick={handleMovieClick}
-        />
-        <Styled.ShowMoreIcon onClick={handleClickShowMore} isActive={page < numberOfPages} />
-      </Styled.Container>
+      <MoviesGrid movies={Object.values(films)} onClick={handleMovieClick} />
+      <Styled.ShowMoreIcon onClick={handleClickShowMore} isActive={page < numberOfPages} />
+    </Styled.Container>
   );
 };

@@ -16,6 +16,7 @@ import {
   getGenresAction,
   getInfoAboutFilmAction,
   getInfoAboutSeasonsAction,
+  getRatingAction,
   getTopAction,
   MoviesActionUnion,
   removeRatingAction,
@@ -31,6 +32,8 @@ export interface MoviesState {
   searchedFilms: FilmsByTitleResponse;
   genres: Genre[];
   moviesByGenre: { [genreId: string]: MoviesByGenre };
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: MoviesState = {
@@ -76,9 +79,12 @@ const initialState: MoviesState = {
     totalRating: 0,
     numberOfAppraisers: 0,
     appraisers: [{ userId: null, rating: 0 }],
+    yourRating: 0,
   },
   genres: [],
   moviesByGenre: {},
+  loading: false,
+  error: null,
 };
 
 export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initialState)
@@ -191,7 +197,20 @@ export const moviesReducer = createReducer<MoviesState, MoviesActionUnion>(initi
     loading: false,
     error: action.payload.error,
   }))
-
+  .handleAction(getRatingAction.request, (state) => ({
+    ...state,
+    loading: true,
+  }))
+  .handleAction(getRatingAction.success, (state, action) => ({
+    ...state,
+    loading: false,
+    movieRating: action.payload,
+  }))
+  .handleAction(getRatingAction.failure, (state, action) => ({
+    ...state,
+    loading: false,
+    error: action.payload.error,
+  }))
   .handleAction(removeRatingAction.request, (state) => ({
     ...state,
     loading: true,
