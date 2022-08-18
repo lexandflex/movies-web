@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { TbSearch } from 'react-icons/tb';
 import { FaRegUser } from 'react-icons/fa';
-import { IoLogOutOutline } from 'react-icons/io5';
+import { IoLogInOutline, IoLogOutOutline } from 'react-icons/io5';
+import { DropDownMenuIconCss } from '@styles/dropDownMenu';
 
 export const Container = styled.div`
   display: flex;
@@ -109,31 +111,24 @@ export const DropDown = styled.div`
   }
 `;
 
-export const DropDownItemIcon = styled(IoLogOutOutline)`
-  padding-right: 1rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  color: ${(props) => props.theme.colors.secondTextColor};
-
-  @media (max-width: 576px) {
-    width: 3rem;
-    height: 3rem;
-  }
+export const LogoutItemIcon = styled(IoLogOutOutline)`
+  ${DropDownMenuIconCss};
 `;
 
-export const DropDownItem = styled.li`
+export const LoginItemIcon = styled(IoLogInOutline)`
+  ${DropDownMenuIconCss};
+`;
+
+export const DropDownItem = styled(Link)`
   padding: 5px 40px 0px 40px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   color: ${(props) => props.theme.colors.secondTextColor};
   border-bottom: none;
   font-size: 1rem;
-
-  &:hover ${DropDownItemIcon} {
-    transform: scale(1.15);
-  }
+  text-decoration: none;
 
   @media (max-width: 576px) {
     font-size: 1.25rem;

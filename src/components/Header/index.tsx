@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigator } from '@services/navigatorService';
+import { RouteNames } from '@router/routeNames';
 import { getByTitleAction } from '@store/actions/movies';
-import { searchedFilmsSelector } from '@store/selectors';
+import { isAuthenticatedSelector, searchedFilmsSelector } from '@store/selectors';
 import { logoutAction } from '@store/actions/auth';
+
 import { AppText } from '@components/AppText';
 import { SearchModal } from '@components/SearchModal';
 import { AppLogo } from '@components/AppLogo';
 import useWindowDimensions from '@utils/hooks/useWindowDimensions';
 import * as Styled from './styles';
-
-const DROPDOWN_LINKS = [{ title: 'Logout', link: '/logout', icon: <Styled.DropDownItemIcon /> }];
+import { DropDownMenu } from './components/DropDownMenu';
 
 const pageNumber = 1;
 
@@ -19,6 +21,7 @@ export const Header = () => {
   const [showSearchModal, setShowSearchModal] = useState(false);
 
   const foundFilms = useSelector(searchedFilmsSelector);
+  const isAuth = useSelector(isAuthenticatedSelector);
 
   const { width } = useWindowDimensions();
 
@@ -42,6 +45,10 @@ export const Header = () => {
     dispatch(logoutAction.request());
   };
 
+  const handleLogin = () => {
+    Navigator.push(RouteNames.LOGIN);
+  };
+
   const SearchComponent = (
     <Styled.SearchWrapper onClick={handleSearchClick} title='Поиск'>
       <Styled.SearchIcon />
@@ -57,16 +64,7 @@ export const Header = () => {
         <Styled.ProfileWrapper onClick={handleToggleDropdown}>
           <Styled.UserIcon />
           {showDropdown && (
-            <Styled.DropDown>
-              <ul>
-                {DROPDOWN_LINKS.map((dropdownLink) => (
-                  <Styled.DropDownItem key={dropdownLink.link} onClick={handleLogout}>
-                    {dropdownLink.icon}
-                    <p>{dropdownLink.title}</p>
-                  </Styled.DropDownItem>
-                ))}
-              </ul>
-            </Styled.DropDown>
+            <DropDownMenu isAuth={isAuth} handleLogout={handleLogout} handleLogin={handleLogin} />
           )}
         </Styled.ProfileWrapper>
       </Styled.Container>
