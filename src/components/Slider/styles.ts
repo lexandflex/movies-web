@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import {
-  MovieCardCss,
-  MovieCardImageCss,
-  MovieCardInfoCss,
-} from '../../styles/movieCard';
+import { MovieCardCss, MovieCardImageCss, MovieCardInfoCss } from '../../styles/movieCard';
 
 export const Container = styled.div`
   width: 100%;
@@ -89,8 +85,8 @@ export const SliderCard = styled.div`
   height: 100%;
   border-radius: 10px;
   display: inline-block;
-  padding-right: 0.5%;
-  padding-left: 0.5%;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
 
   &:hover {
     transform: translateY(-2%);

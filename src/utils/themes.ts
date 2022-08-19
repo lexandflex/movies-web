@@ -10,6 +10,7 @@ export interface Theme {
     backgroundColor: string;
     secondBackgroundColor: string;
     ratingStarColor: string;
+    spinnerColor: string;
   };
 }
 // #d9d7e0 - text color
@@ -25,6 +26,7 @@ export const darkTheme: Theme = {
     backgroundColor: '#0e101c',
     secondBackgroundColor: '#030303',
     ratingStarColor: '#ffcd3c',
+    spinnerColor: '#5652bf',
   },
 };
 
@@ -40,6 +42,7 @@ export const lightTheme: Theme = {
     backgroundColor: '#1e2a4a',
     secondBackgroundColor: '#030303',
     ratingStarColor: '#ffcd3c',
+    spinnerColor: '#5652bf',
   },
 };
 

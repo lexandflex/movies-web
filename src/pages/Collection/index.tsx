@@ -7,6 +7,7 @@ import { MovieCollections } from '@constants/movieCollections';
 import { RouteNames } from '@router/routeNames';
 import { getByGenreAction, getGenresAction, getTopAction } from '@store/actions/movies';
 import { State } from '@store/reducers';
+import { Spinner } from '@components/Spinner';
 import * as Styled from './styles';
 import { Movies } from './types';
 
@@ -27,7 +28,7 @@ export const Collection: FC = () => {
     Navigator.push(`/${RouteNames.MOVIES}/${id}`);
   };
 
-  const { topFilms, moviesByGenre, genres } = useSelector((state: State) => state.movies);
+  const { topFilms, moviesByGenre, genres, loading } = useSelector((state: State) => state.movies);
 
   useEffect(() => {
     if (name !== MovieCollections.Top) {
@@ -123,7 +124,11 @@ export const Collection: FC = () => {
   return (
     <Styled.Container>
       <MoviesGrid movies={Object.values(films)} onClick={handleMovieClick} />
-      <Styled.ShowMoreIcon onClick={handleClickShowMore} isActive={page < numberOfPages} />
+      {!loading ? (
+        <Styled.ShowMoreIcon onClick={handleClickShowMore} isActive={page < numberOfPages} />
+      ) : (
+        <Spinner />
+      )}
     </Styled.Container>
   );
 };
