@@ -52,7 +52,7 @@ export const SearchResultList = styled.div`
 export const SearchItemDescription = styled.div`
   display: flex;
   flex-direction: column;
-  
+
   & p {
     color: ${(props) => props.theme.colors.secondTextColor};
   }
@@ -86,7 +86,8 @@ export const SearchResultItem = styled.div`
     flex-direction: row;
     text-decoration: none;
 
-    &:hover p:not(:last-of-type), &:hover ${SearchItemDescription} span {
+    &:hover p:not(:last-of-type),
+    &:hover ${SearchItemDescription} span {
       transition: all 0.4s;
       color: ${(props) => props.theme.colors.accentColor};
       text-shadow: none;
@@ -101,8 +102,6 @@ export const IconWrapper = styled.div`
 `;
 
 export const CloseIcon = styled(GrClose)`
-  color: ${(props) => props.theme.colors.secondBackgroundColor};
-  background-color: ${(props) => props.theme.colors.accentColor};
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -111,6 +110,10 @@ export const CloseIcon = styled(GrClose)`
   &:hover {
     transform: scale(1.1) rotate(10deg);
     color: ${(props) => props.theme.colors.textColor};
+  }
+
+  path {
+    stroke: ${(props) => props.theme.colors.accentColor};
   }
 
   @media (max-width: 768px) {

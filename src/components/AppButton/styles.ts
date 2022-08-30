@@ -4,7 +4,7 @@ import { Theme } from '../../utils/themes';
 export const ButtonContainer = styled.button<{ themeColor: keyof Theme['colors'] }>`
   border: none;
   border-radius: 8px;
-  padding: 10;
+  padding: 10px;
   background-color: ${(props) => props.theme.colors[props.themeColor]};
   cursor: pointer;
   width: 100%;
@@ -17,4 +17,5 @@ export const ButtonContainer = styled.button<{ themeColor: keyof Theme['colors']
 
 export const ButtonText = styled.p`
   font-weight: bold;
+  font-size: 16px;
 `;

@@ -13,15 +13,10 @@ import { Movies } from './types';
 
 export const Collection: FC = () => {
   const dispatch = useDispatch();
-
   const { name } = useParams();
-
   const [page, setPage] = useState(1);
-
   const [films, setFilms] = useState<Movies>({});
-
   const [genreId, setGenreId] = useState('');
-
   const [numberOfPages, setNumberOfPages] = useState(1);
 
   const handleMovieClick = (id: string) => {

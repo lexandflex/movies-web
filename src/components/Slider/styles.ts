@@ -87,6 +87,7 @@ export const SliderCard = styled.div`
   display: inline-block;
   margin-right: 0.5%;
   margin-left: 0.5%;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-2%);

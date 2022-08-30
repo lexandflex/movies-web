@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from '@components/Modal';
 import { isAuthenticatedSelector } from '@store/selectors';
 import { addRatingAction, removeRatingAction } from '@store/actions/movies';
+import { Navigator } from '@services/navigatorService';
+import { RouteNames } from '@router/routeNames';
 import { Props } from './types';
 import * as Styled from './styles';
 
@@ -27,6 +29,11 @@ export const RatingModal: FC<Props> = ({
     dispatch(removeRatingAction.request({ kinopoiskId: filmId }));
   };
 
+  const handleAuth = () => {
+    console.log('here');
+    Navigator.push(RouteNames.LOGIN);
+  };
+
   const isAuth = useSelector(isAuthenticatedSelector);
   console.log('isAuth: ', isAuth);
 
@@ -34,9 +41,9 @@ export const RatingModal: FC<Props> = ({
     <Modal
       showModal={showModal}
       onClose={onClose}
-      title={`Рейтинг : ${totalRate && totalVotes 
-        ? (totalRate / totalVotes).toFixed(2) 
-        : 'отсутствует'}`}
+      title={`Рейтинг : ${
+        totalRate && totalVotes ? (totalRate / totalVotes).toFixed(2) : 'отсутствует'
+      }`}
       text={`Количество оценок : ${totalVotes || 0}`}
     >
       <>
@@ -53,18 +60,18 @@ export const RatingModal: FC<Props> = ({
               </Styled.RatingItem>
             ))
           ) : (
-            <Styled.NotifyBlock>Авторизуйтесь, чтобы оценить фильм</Styled.NotifyBlock>
+            <Styled.NotifyBlock onClick={handleAuth}>
+              Авторизуйтесь, чтобы оценить фильм
+            </Styled.NotifyBlock>
           )}
         </Styled.RatingBlock>
-        {
-          isAuth && (
-            <Styled.ResetRatingButton
-              aria-label='Reset personal rating'
-              onClick={handleResetRatingButton}
-              title='Сбросить свою оценку'
-            />
-          )
-        }
+        {isAuth && (
+          <Styled.ResetRatingButton
+            aria-label="Reset personal rating"
+            onClick={handleResetRatingButton}
+            title="Сбросить свою оценку"
+          />
+        )}
       </>
     </Modal>
   );

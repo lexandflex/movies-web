@@ -5,6 +5,7 @@ const FlexRowSpaceBetween = css`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
 `;
 
@@ -109,7 +110,7 @@ export const FooterNavigation = styled.ul`
       color: ${(props) => props.theme.colors.accentColor};
     }
   }
-  
+
   & a {
     text-decoration: none;
     transition: all 0.2s;

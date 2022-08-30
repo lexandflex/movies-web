@@ -7,6 +7,7 @@ import { AppButton } from '@components/AppButton';
 import { AppForm } from '@components/AppForm';
 import { registerAction } from '@store/actions/auth';
 import { registerSchema } from './yupSchema';
+import * as Styled from './styles';
 
 export const Register = (): ReactElement => {
   const dispatch = useDispatch();
@@ -17,7 +18,6 @@ export const Register = (): ReactElement => {
   } = useForm({ resolver: yupResolver(registerSchema), mode: 'onChange' });
 
   const onSubmit = (data: any) => {
-    console.log({ data });
     dispatch(registerAction.request({ email: data.email, password: data.password }));
   };
 
@@ -45,7 +45,9 @@ export const Register = (): ReactElement => {
         type="password"
         {...register('confirmPassword')}
       />
-      <AppButton type="submit" title="Confirm" />
+      <Styled.ButtonWrapper>
+        <AppButton type="submit" title="Confirm" />
+      </Styled.ButtonWrapper>
     </AppForm>
   );
 };

@@ -1,6 +1,6 @@
 export enum RouteNames {
-  LOGIN = 'login',
-  REGISTER = 'register',
-  MOVIES = 'movies',
-  COLLECTIONS = 'collections',
+  LOGIN = '/login',
+  REGISTER = '/register',
+  MOVIES = '/movies',
+  COLLECTIONS = '/collections',
 }

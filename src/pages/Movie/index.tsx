@@ -15,15 +15,13 @@ export const Movie: FC = () => {
   const [showModal, setShowModal] = useState(false);
   const { totalRating, numberOfAppraisers, yourRating } = useSelector(movieRatingSelector);
 
+  console.log({ totalRating, numberOfAppraisers, yourRating });
+
   const handleShowModal = () => {
     setShowModal(!showModal);
   };
 
   const currentFilm = useMemo(() => films[id || ''], [films, id]);
-
-  console.log({ id, totalRating, numberOfAppraisers });
-
-  console.log({ currentFilm });
 
   useEffect(() => {
     if (id) {
@@ -42,31 +40,58 @@ export const Movie: FC = () => {
 
   return (
     <Styled.Container>
-      <Styled.MainInfo>
-        <Styled.RatingStar title="Рейтинг" onClick={handleShowModal} />
-        <AppText tag="h1" size="xl" text={currentFilm?.nameRu || ''} />
-        <AppText
-          size="sm"
-          text={`${currentFilm?.nameOriginal || ''} (${currentFilm?.countries[0].country})`}
-        />
-        <AppText text={currentFilm?.description || ''} />
-        <AppText text={`Год выпуска: ${currentFilm?.year || ''}`} />
-        <AppText text={`Кинопоиск : ${currentFilm?.ratingKinopoisk || ''}`} />
-        <AppText text={`IMDB : ${currentFilm?.ratingImdb || ''}`} />
-        {currentFilm?.genres?.map(({ genre }) => (
-          <AppText key={genre} text={genre || ''} />
-        ))}
-        <AppText text={`${currentFilm?.ratingAgeLimits}+`} />
-        <AppText
-          text={`Длительность: ${currentFilm?.filmLength} ${declOfNum(currentFilm?.filmLength, [
-            'минута',
-            'минуты',
-            'минут',
-          ])}`}
-        />
-      </Styled.MainInfo>
+      {currentFilm ? (
+        <Styled.MainInfo>
+          <Styled.RatingWrapper>
+            <AppText
+              tag="h1"
+              size="xl"
+              text={
+                `${currentFilm?.nameRu} (${currentFilm?.nameOriginal || ''} — ${
+                  currentFilm?.countries[0].country
+                })` || ''
+              }
+            />
+            <Styled.RatingStar title="Рейтинг" onClick={handleShowModal} />
+          </Styled.RatingWrapper>
+          <AppText color="secondTextColor" text={currentFilm?.description || ''} />
+          <Styled.FilmInfo>
+            <Styled.FilmDetails>
+              <AppText
+                color="accentColor"
+                text={`JunkieTV: ${
+                  numberOfAppraisers ? (totalRating / numberOfAppraisers).toFixed(1) : '-' || ''
+                }`}
+              />
+              <AppText
+                color="secondTextColor"
+                text={`Кинопоиск: ${currentFilm?.ratingKinopoisk || ''}`}
+              />
+              <AppText color="secondTextColor" text={`IMDB: ${currentFilm?.ratingImdb || ''}`} />
+              <AppText color="secondTextColor" text={`Год выпуска: ${currentFilm?.year || ''}`} />
+              <AppText color="secondTextColor" text={`${currentFilm?.ratingAgeLimits}+`} />
+              <AppText
+                color="secondTextColor"
+                text={`Длительность: ${currentFilm?.filmLength} ${declOfNum(
+                  currentFilm?.filmLength,
+                  ['минута', 'минуты', 'минут'],
+                )}`}
+              />
+            </Styled.FilmDetails>
+
+            <Styled.Genres>
+              {currentFilm?.genres?.map(({ genre }) => (
+                <AppText key={genre} color="secondTextColor" text={`• ${genre || ''}`} />
+              ))}
+            </Styled.Genres>
+          </Styled.FilmInfo>
+        </Styled.MainInfo>
+      ) : (
+        <AppText className="center" size="lg" text="Нет информации о фильме" />
+      )}
+
       <Styled.Player>
-        <div id="yohoho" data-kinopoisk={id} />
+        <div id="yohoho" data-kinopoisk={id} data-resize="1" />
       </Styled.Player>
 
       <RatingModal
@@ -75,7 +100,7 @@ export const Movie: FC = () => {
         totalVotes={numberOfAppraisers}
         totalRate={totalRating}
         yourRating={yourRating}
-        filmId={id as string}
+        filmId={id || ''}
       />
     </Styled.Container>
   );

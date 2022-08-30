@@ -14,7 +14,6 @@ import React, {
 } from 'react-router-dom';
 import { Collection } from '../pages/Collection';
 import { Main } from '../pages/Main';
-import { PrivateRoute } from './PrivateRoute';
 
 export const AppRouter: FC = (): ReactElement => (
   <Router history={Navigator.history}>

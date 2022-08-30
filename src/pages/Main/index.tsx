@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RouteNames } from '@router/routeNames';
@@ -8,6 +8,7 @@ import { MovieCollections } from '@constants/movieCollections';
 import { getByGenreAction, getGenresAction, getTopAction } from '@store/actions/movies';
 import { State } from '@store/reducers';
 import { Genre, MoviesByGenre } from '@models/movies';
+import { Slide } from '@components/Slider/types';
 import * as Styled from './styles';
 
 const COLLECTIONS = [
@@ -29,15 +30,15 @@ export const Main: FC = () => {
 
   const [genreWithId, setGenreWithId] = useState<Genre[]>([]);
 
-  const handleSlideClick = (id: string) => {
+  const handleSlideClick = useCallback((id: string) => {
     Navigator.push(`${RouteNames.MOVIES}/${id}`);
-  };
+  }, []);
 
   useEffect(() => {
     genreWithId.forEach(({ id }) => {
       dispatch(getByGenreAction.request({ genreId: `${id}`, page }));
     });
-  }, [genreWithId]);
+  }, [dispatch, genreWithId, page]);
 
   const topFilmsSlides = useMemo(
     () =>
@@ -52,38 +53,28 @@ export const Main: FC = () => {
     [topFilms],
   );
 
-  const filmsByGenreSlides = useMemo(() => {
-    const arr = Object.entries(moviesByGenre);
-    return arr.reduce<{
-      [key: string]: {
-        id: string;
-        image: string;
-        name: string;
-        year: string;
-        genres: string;
-        countries: string;
-      }[];
-    }>((prev, current) => {
-      const key = current[0];
-
-      const slides = current[1].items.map((film) => ({
-        id: `${film.kinopoiskId}`,
-        image: film.posterUrlPreview || '',
-        name: film.nameRu || '',
-        year: `${film.year}` || '',
-        genres: film.genres.map((genre) => genre.genre).join(', ') || '',
-        countries: film.countries.map((country) => country.country).join(', ') || '',
-      }));
-
-      return { ...prev, [key]: slides };
-    }, {});
-  }, [moviesByGenre]);
-
-  console.log(filmsByGenreSlides);
+  const filmsByGenreSlides: { [key: string]: Slide[] } = useMemo(
+    () =>
+      Object.entries(moviesByGenre).reduce(
+        (acc, [genreId, movies]) => ({
+          ...acc,
+          [genreId]: movies.items.map((film) => ({
+            id: `${film.kinopoiskId}`,
+            image: film.posterUrlPreview || '',
+            name: film.nameRu || '',
+            year: `${film.year}` || '',
+            genres: film.genres.map((genre) => genre.genre).join(', ') || '',
+            countries: film.countries.map((country) => country.country).join(', ') || '',
+          })),
+        }),
+        {},
+      ),
+    [moviesByGenre],
+  );
 
   useEffect(() => {
     dispatch(getGenresAction.request());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const collections = COLLECTIONS.reduce<Genre[]>((prev, current) => {
@@ -103,32 +94,25 @@ export const Main: FC = () => {
     dispatch(getTopAction.request({ page }));
   }, [dispatch, page]);
 
+  console.log({ filmsByGenreSlides, genreWithId });
   return (
     <Styled.Container>
       <Styled.MovieCategoryContainer>
         <Link to={`${RouteNames.COLLECTIONS}/${MovieCollections.Top}`}>Лучшее</Link>
 
-        <Slider
-          slides={topFilmsSlides}
-          onClick={handleSlideClick}
-        />
+        <Slider slides={topFilmsSlides} onClick={handleSlideClick} />
       </Styled.MovieCategoryContainer>
 
-      {genreWithId.map(({ id, genre }) => {
-        if (id in filmsByGenreSlides) {
-          return (
+      {genreWithId.map(
+        ({ id, genre }) =>
+          filmsByGenreSlides[id] && (
             <Styled.MovieCategoryContainer key={id}>
               <Link to={`${RouteNames.COLLECTIONS}/${genre}`}>{genre}</Link>
 
-              <Slider
-                slides={filmsByGenreSlides[id]}
-                onClick={handleSlideClick}
-              />
+              <Slider slides={filmsByGenreSlides[id]} onClick={handleSlideClick} />
             </Styled.MovieCategoryContainer>
-          );
-        }
-        return null;
-      })}
+          ),
+      )}
     </Styled.Container>
   );
 };

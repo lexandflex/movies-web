@@ -7,22 +7,23 @@ import { SOCIALS, CONTACTS, NAV, ABOUT } from './data';
 import * as Styled from './styles';
 
 export const Footer: FC = () => {
-
-  const { width } = useWindowDimensions();
+  const { isMobile } = useWindowDimensions();
 
   return (
     <Styled.FooterWrapper>
       <Styled.FooterMain>
         <Styled.FooterMainBox>
-          <AppLogo windowWidth={width} />
+          <AppLogo isMobile={isMobile} />
           <Styled.FooterContacts>
-            {Object.values(CONTACTS).map((item, i) => <AppText key={+i} text={item} />)}
+            {Object.values(CONTACTS).map((item, i) => (
+              <AppText key={+i} text={item} />
+            ))}
           </Styled.FooterContacts>
         </Styled.FooterMainBox>
         <Styled.FooterMainBox>
           <Styled.FooterNavigation>
-            <AppText text='Навигация' tag='h2' />
-            {NAV.map(link => (
+            <AppText text="Навигация" tag="h2" />
+            {NAV.map((link) => (
               <li key={link.id}>
                 <Link to={link.route}>{link.title}</Link>
               </li>
@@ -31,8 +32,8 @@ export const Footer: FC = () => {
         </Styled.FooterMainBox>
         <Styled.FooterMainBox>
           <Styled.FooterNavigation>
-            <AppText text='О нас' tag='h2' />
-            {ABOUT.map(link => (
+            <AppText text="О нас" tag="h2" />
+            {ABOUT.map((link) => (
               <li key={link.id}>
                 <Link to={link.route}>{link.title}</Link>
               </li>
@@ -44,10 +45,10 @@ export const Footer: FC = () => {
       <Styled.FooterDown>
         <Styled.FooterRights>
           <Styled.CopyRightsIcon />
-          <AppText text='Innowise Group 2022' />
+          <AppText text="Innowise Group 2022" />
         </Styled.FooterRights>
         <Styled.FooterSocials>
-          {SOCIALS.map(social => (
+          {SOCIALS.map((social) => (
             <Styled.SocialsIconWrapper href={social.link} title={social.title} key={social.id}>
               {social.icon}
             </Styled.SocialsIconWrapper>
@@ -56,4 +57,4 @@ export const Footer: FC = () => {
       </Styled.FooterDown>
     </Styled.FooterWrapper>
   );
-}
+};

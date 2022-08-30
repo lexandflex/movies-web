@@ -9,7 +9,6 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 1rem 3rem;
-  margin-bottom: 6%;
   justify-content: space-between;
 
   @media (max-width: 576px) {

@@ -23,7 +23,7 @@ export const Header = () => {
   const foundFilms = useSelector(searchedFilmsSelector);
   const isAuth = useSelector(isAuthenticatedSelector);
 
-  const { width } = useWindowDimensions();
+  const { isMobile } = useWindowDimensions();
 
   const handleSearchClick = () => {
     setShowSearchModal(true);
@@ -50,16 +50,16 @@ export const Header = () => {
   };
 
   const SearchComponent = (
-    <Styled.SearchWrapper onClick={handleSearchClick} title='Поиск'>
+    <Styled.SearchWrapper onClick={handleSearchClick} title="Поиск">
       <Styled.SearchIcon />
-      {width > 576 && <AppText text='Поиск' tag='h2' size='sm' />}
+      {!isMobile && <AppText text="Поиск" tag="h2" size="sm" />}
     </Styled.SearchWrapper>
   );
 
   return (
     <>
       <Styled.Container>
-        <AppLogo windowWidth={width} />
+        <AppLogo isMobile={isMobile} />
         {SearchComponent}
         <Styled.ProfileWrapper onClick={handleToggleDropdown}>
           <Styled.UserIcon />

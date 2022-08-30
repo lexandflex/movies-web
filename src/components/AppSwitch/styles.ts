@@ -1,5 +1,5 @@
+import { Size } from '@models/common';
 import styled from 'styled-components';
-import { Size } from './types';
 
 type SwitchSizes = {
   [key in Size]: {
@@ -33,6 +33,13 @@ const sizes: SwitchSizes = {
     switchMargin: '4px',
   },
   lg: {
+    labelWidth: '60px',
+    labelHeight: '37px',
+    switchSize: '26px',
+    checkedMarginLeft: '30px',
+    switchMargin: '5px',
+  },
+  xl: {
     labelWidth: '60px',
     labelHeight: '37px',
     switchSize: '26px',

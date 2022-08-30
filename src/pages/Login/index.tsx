@@ -8,9 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '@store/actions/auth';
 import { authErrorSelector } from '@store/selectors';
 import { loginSchema } from './yupSchema';
+import * as Styled from './styles';
 
 export const Login = (): ReactElement => {
-
   const dispatch = useDispatch();
   const serverError = useSelector(authErrorSelector);
   console.log('serverError ', serverError);
@@ -43,7 +43,9 @@ export const Login = (): ReactElement => {
         type="password"
         {...register('password')}
       />
-      <AppButton type="submit" title="Confirm" />
+      <Styled.ButtonWrapper>
+        <AppButton type="submit" title="Confirm" />
+      </Styled.ButtonWrapper>
     </AppForm>
   );
 };

@@ -8,7 +8,6 @@ import { Props } from './types';
 import * as Styled from './styles';
 
 export const SearchModal: FC<Props> = ({ onClose, handleSearch, data }) => {
-
   const inputRef = useRef<HTMLInputElement>(null);
   const movies = useDeferredValue(data);
 
@@ -21,41 +20,34 @@ export const SearchModal: FC<Props> = ({ onClose, handleSearch, data }) => {
     <Styled.Container>
       <Styled.Content>
         <Styled.IconWrapper onClick={onClose}>
-          <Styled.CloseIcon />
+          <Styled.CloseIcon stroke="green" />
         </Styled.IconWrapper>
         <Styled.Search>
-          <AppText text='Поиск' size='xl' color='secondTextColor' tag='h1' />
-          <AppInput
-            type='search'
-            onChange={handleInputChange}
-            fontSize={24}
-            ref={inputRef}
-            focus
-          />
+          <AppText text="Поиск" size="xl" color="secondTextColor" tag="h1" />
+          <AppInput type="search" onChange={handleInputChange} fontSize={24} ref={inputRef} focus />
         </Styled.Search>
         <Styled.SearchHintBlock>
           <Styled.SearchHintContainer>
             <Styled.SearchResultList>
-              {movies.length && movies.map(({ filmId, nameEn, nameRu, year }) => (
-                <Styled.SearchResultItem key={filmId}>
-                  <Link to={`${RouteNames.MOVIES}/${filmId}`} onClick={onClose}>
-                    <Styled.SearchItemIconWrapper>
-                      <Styled.MovieIcon />
-                    </Styled.SearchItemIconWrapper>
-                    <Styled.SearchItemDescription>
-                      {
-                        inputRef.current ? (
-                          <p>
-                            { highlightMatch(inputRef.current?.value, nameRu || nameEn) }
-                          </p>
-                        ) : <AppText text={nameRu} />
-                      }
-                      <AppText text={nameEn} />
-                      <AppText text={year} />
-                    </Styled.SearchItemDescription>
-                  </Link>
-                </Styled.SearchResultItem>
-              ))}
+              {movies.length &&
+                movies.map(({ filmId, nameEn, nameRu, year }) => (
+                  <Styled.SearchResultItem key={filmId}>
+                    <Link to={`${RouteNames.MOVIES}/${filmId}`} onClick={onClose}>
+                      <Styled.SearchItemIconWrapper>
+                        <Styled.MovieIcon />
+                      </Styled.SearchItemIconWrapper>
+                      <Styled.SearchItemDescription>
+                        {inputRef.current ? (
+                          <p>{highlightMatch(inputRef.current?.value, nameRu || nameEn)}</p>
+                        ) : (
+                          <AppText text={nameRu} />
+                        )}
+                        <AppText text={nameEn} />
+                        <AppText text={year} />
+                      </Styled.SearchItemDescription>
+                    </Link>
+                  </Styled.SearchResultItem>
+                ))}
             </Styled.SearchResultList>
           </Styled.SearchHintContainer>
         </Styled.SearchHintBlock>

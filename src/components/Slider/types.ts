@@ -1,11 +1,13 @@
+export interface Slide {
+  id: string;
+  image: string;
+  name: string | '';
+  year: string | '';
+  genres: string | '';
+  countries: string | '';
+}
+
 export interface Props {
-  slides: {
-    id: string;
-    image: string;
-    name: string | '';
-    year: string | '';
-    genres: string | '';
-    countries: string | '';
-  }[];
+  slides: Slide[];
   onClick?: (id: string) => void;
 }

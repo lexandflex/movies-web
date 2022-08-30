@@ -19,7 +19,6 @@ export class AuthSagaWorker {
         payload.email,
         payload.password,
       );
-      console.log({ response });
 
       putTokensInLocalStorage(response.data.accessToken, response.data.refreshToken);
 
@@ -29,7 +28,7 @@ export class AuthSagaWorker {
           refreshToken: response.data.refreshToken,
         }),
       );
-      Navigator.push(RouteNames.MOVIES);
+      Navigator.push('/');
     } catch (error: any) {
       yield put(loginAction.failure({ error: error.message }));
     }
@@ -53,7 +52,7 @@ export class AuthSagaWorker {
         }),
       );
 
-      Navigator.push(RouteNames.MOVIES);
+      Navigator.push('/');
     } catch (error: any) {
       yield put(registerAction.failure({ error: error.message }));
     }

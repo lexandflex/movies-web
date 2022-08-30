@@ -9,6 +9,7 @@ export interface Theme {
     altTextColor: string;
     backgroundColor: string;
     secondBackgroundColor: string;
+    thirdBackgroundColor: string;
     ratingStarColor: string;
     spinnerColor: string;
   };
@@ -25,6 +26,7 @@ export const darkTheme: Theme = {
     altTextColor: '#add8e6',
     backgroundColor: '#0e101c',
     secondBackgroundColor: '#030303',
+    thirdBackgroundColor: '#555',
     ratingStarColor: '#ffcd3c',
     spinnerColor: '#5652bf',
   },
@@ -41,6 +43,7 @@ export const lightTheme: Theme = {
     altTextColor: '#add8e6',
     backgroundColor: '#1e2a4a',
     secondBackgroundColor: '#030303',
+    thirdBackgroundColor: '#555',
     ratingStarColor: '#ffcd3c',
     spinnerColor: '#5652bf',
   },

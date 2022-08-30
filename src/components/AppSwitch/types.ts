@@ -1,4 +1,5 @@
-export type Size = 'xs' | 'sm' | 'md' | 'lg';
+import { Size } from '@models/common';
+
 export interface Props {
   size?: Size;
   checked?: boolean;

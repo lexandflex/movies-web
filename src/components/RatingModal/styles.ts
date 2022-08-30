@@ -63,6 +63,7 @@ export const NotifyBlock = styled.div`
   border-radius: 16px;
   margin-top: 10%;
   padding: 0 2rem;
+  cursor: pointer;
 
   @media (max-width: 992px) {
     max-width: 450px;

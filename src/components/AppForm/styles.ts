@@ -11,8 +11,8 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 200px;
-  max-width: 350px;
+  min-width: 300px;
+  max-width: 600px;
   width: 95%;
   border: 1px solid;
   padding: 20px;
@@ -36,7 +36,7 @@ export const Form = styled.form`
 export const BottomFormLink = styled.div`
   padding-top: 10px;
   color: ${(props) => props.theme.colors.textColor};
-  font-size: small;
+  font-size: 16px;
   a {
     color: ${(props) => props.theme.colors.accentColor};
     text-decoration: none;

@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useEffect, useRef, useState } from 'react';
 import { AppButton } from '@components/AppButton';
 import { AppText } from '@components/AppText';
 import * as Styles from './styles';
 import { Props } from './types';
 
-export const Slider: FC<Props> = ({ slides, onClick }) => {
+export const Slider: FC<Props> = memo(({ slides, onClick }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const sliderCardRef = useRef<HTMLDivElement>(null);
 
@@ -40,14 +40,17 @@ export const Slider: FC<Props> = ({ slides, onClick }) => {
       <Styles.SliderContainer>
         <Styles.Slider ref={sliderRef}>
           {slides.map((slide) => (
-            <Styles.SliderCard key={slide.id} ref={sliderCardRef}>
+            <Styles.SliderCard
+              key={slide.id}
+              ref={sliderCardRef}
+              onClick={handleSlideClick(slide.id)}
+            >
               <Styles.SliderCardImage src={slide.image} alt="logo" />
               <Styles.SliderCardInfo>
                 <AppText text={slide.name} tag="h1" />
                 <AppText text={slide.countries} />
                 <AppText text={slide.year} />
                 <AppText text={slide.genres} />
-                <AppButton title="Подробнее" onClick={handleSlideClick(slide.id)} />
               </Styles.SliderCardInfo>
             </Styles.SliderCard>
           ))}
@@ -56,4 +59,4 @@ export const Slider: FC<Props> = ({ slides, onClick }) => {
       <Styles.SliderIconRight onClick={handleSlideRight} />
     </Styles.Container>
   );
-};
+});
